@@ -10,13 +10,7 @@
   align-self: center;
 }
 
-.email_input {
+.all_inputs {
   width: 80%;
   align-self: center;
-}
-
-.password_input {
-  width: 80%;
-  align-self: center;
-  height: 15%;
 }

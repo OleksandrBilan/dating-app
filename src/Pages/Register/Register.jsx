@@ -5,42 +5,67 @@ import s from "./style.module.css";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import axios from "axios";
 import { API_URL } from "../../config";
+import { UserInfoForm } from "../../Components/UserInfoForm/UserInfoForm";
 
 export function Register() {
   const [progressStage, setProgressStage] = useState(1);
-  const [title, setTitle] = useState("Please, enter your credentials");
+  const [userInfo, setUserInfo] = useState();
 
-  function onLoginSumbit(formValues) {
+  function onLoginSubmit(formValues) {
+    setUserInfo({ email: formValues.email, password: formValues.password });
+    setProgressStage(progressStage + 1);
+  }
+
+  function onUserInfoSubmit(formValues) {
+    let registrationInfo = {
+      ...userInfo,
+      name: formValues.name,
+      birthDate: formValues.birthDate,
+      cityId: 1,
+      sex: 1,
+      sexPreferences: 0,
+      description: formValues.description,
+    };
+
     axios
-      .post(`${API_URL}/auth/login`, {
-        email: formValues.email,
-        password: formValues.password,
-      })
+      .post(`${API_URL}/auth/register`, registrationInfo)
       .then((response) => {
-        setProgressStage(progressStage + 1);
-        setTitle("Please, enter info about yourself");
-        alert(JSON.stringify(response));
+        if (response.status == 200) {
+          setProgressStage(progressStage + 1);
+        }
       })
       .catch((error) => {
-        alert(error);
+        alert(`Can't create a user, error: ${error}`);
       });
   }
 
   return (
     <div className={s.container}>
-      <Card className={s.card}>
+      <Card className={s.card} border="primary">
         <div className={s.progress_bar}>
           <ProgressBar
             now={progressStage * 33.3}
             visuallyHidden
             style={{ borderRadius: 5 }}
-            variant="success"
+            variant="primary"
           />
         </div>
         <div className={s.title}>
-          <span>{title}</span>
+          <span>
+            {progressStage == 1
+              ? "Please, enter your credentials"
+              : progressStage == 2
+              ? "Please, enter info about yourself"
+              : "Please, confirm your email"}
+          </span>
         </div>
-        <LoginForm onSubmit={onLoginSumbit} />
+        {progressStage == 1 ? (
+          <LoginForm onSubmit={onLoginSubmit} />
+        ) : progressStage == 2 ? (
+          <UserInfoForm onSubmit={onUserInfoSubmit} />
+        ) : (
+          <div style={{ height: "90%" }}></div>
+        )}
       </Card>
     </div>
   );
