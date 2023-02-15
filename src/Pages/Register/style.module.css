@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.card {
+  width: 40%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.progress_bar {
+  align-self: center;
+  padding-top: 2.5%;
+  width: 95%;
+}
+
+.title {
+  align-self: center;
+  font-size: 22px;
+}

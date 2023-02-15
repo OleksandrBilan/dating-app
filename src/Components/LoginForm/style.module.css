@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.submit_btn {
+  align-self: center;
+}
+
+.email_input {
+  width: 80%;
+  align-self: center;
+}
+
+.password_input {
+  width: 80%;
+  align-self: center;
+}
