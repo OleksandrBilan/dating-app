@@ -6,31 +6,31 @@ import { API_URL } from "../../config";
 import s from "./style.module.css";
 
 export function ConfirmedEmail() {
-  const { userId, confirmationToken } = useParams();
+  const { userId } = useParams();
   const navigate = useNavigate();
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState();
 
   useEffect(() => {
     axios
-      .post(`${API_URL}/auth/confirmEmail`, {
-        userId,
-        confirmationToken,
-      })
+      .post(`${API_URL}/auth/confirmEmail`, { userId })
       .then((response) => {
         setTitle(
-          `Your email is successfully confirmed! You can now ${(
-            <a onClick={() => navigate("/login")}>log in</a>
-          )}  :)`
+          <div>
+            Your email is successfully confirmed! You can now{" "}
+            <a onClick={() => navigate("/login")}>log in</a> :)
+          </div>
         );
       })
       .catch((error) => {
         setTitle("An error ocurred while confirming your email :(");
       });
-  }, []);
+  });
 
   return (
     <div className={s.container}>
-      <Card>{title}</Card>
+      <Card border="primary" className={s.card}>
+        {title}
+      </Card>
     </div>
   );
 }

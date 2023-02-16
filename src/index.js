@@ -10,11 +10,8 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/user/new" element={<Register />} />
-        <Route
-          path="/confirmEmail/:userId/:confirmationToken"
-          element={<ConfirmedEmail />}
-        />
+        <Route path="user/new" element={<Register />} />
+        <Route path="confirmEmail/:userId" element={<ConfirmedEmail />} />
         <Route path="/" element={<App />} />
       </Routes>
     </BrowserRouter>
