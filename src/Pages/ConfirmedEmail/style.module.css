@@ -1,0 +1,6 @@
+.container {
+  font-weight: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
