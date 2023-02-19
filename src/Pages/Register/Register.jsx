@@ -21,18 +21,17 @@ export function Register() {
       ...userInfo,
       name: formValues.name,
       birthDate: formValues.birthDate,
-      cityId: 1,
-      sex: 1,
-      sexPreferences: 0,
+      country: formValues.country,
+      city: formValues.city,
+      sex: formValues.sex,
+      sexPreferences: formValues.sexPreferences,
       description: formValues.description,
     };
 
     axios
       .post(`${API_URL}/auth/register`, registrationInfo)
       .then((response) => {
-        if (response.status == 200) {
-          setProgressStage(progressStage + 1);
-        }
+        setProgressStage(progressStage + 1);
       })
       .catch((error) => {
         alert(`Can't create a user, error: ${error}`);
