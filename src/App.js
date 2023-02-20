@@ -1,7 +1,8 @@
-import { LoginForm } from "./Components/LoginForm/LoginForm";
-import { Register } from "./Pages/Register/Register";
+import axios from "axios";
+import { API_URL } from "./config";
 
 function App() {
+  axios.get(`${API_URL}/test/test`).then((response) => alert("success"));
   return <div className="App">APP</div>;
 }
 
