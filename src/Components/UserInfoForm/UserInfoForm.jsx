@@ -31,8 +31,8 @@ export function UserInfoForm({ onSubmit }) {
     birthDate: Date.now(),
     country: { code: "", name: "" },
     city: { name: "", countryCode: "" },
-    sex: 0,
-    sexPreferences: 0,
+    sexId: 0,
+    sexPreferencesId: 0,
     description: "",
   });
   const [formErrors, setFormErrors] = useState({
@@ -98,7 +98,7 @@ export function UserInfoForm({ onSubmit }) {
     if (value[0] != undefined) {
       setFormValues({
         ...formValues,
-        sex: value[0].id,
+        sexId: value[0].id,
       });
       setFormErrors({
         ...formErrors,
@@ -111,7 +111,7 @@ export function UserInfoForm({ onSubmit }) {
     if (value[0] != undefined) {
       setFormValues({
         ...formValues,
-        sexPreferences: value[0].id,
+        sexPreferencesId: value[0].id,
       });
       setFormErrors({
         ...formErrors,

@@ -19,13 +19,7 @@ export function Register() {
   function onUserInfoSubmit(formValues) {
     let registrationInfo = {
       ...userInfo,
-      name: formValues.name,
-      birthDate: formValues.birthDate,
-      country: formValues.country,
-      city: formValues.city,
-      sex: formValues.sex,
-      sexPreferences: formValues.sexPreferences,
-      description: formValues.description,
+      ...formValues,
     };
 
     axios

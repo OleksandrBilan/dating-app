@@ -29,7 +29,7 @@ export function ConfirmedEmail() {
   return (
     <div className={s.container}>
       <Card border="primary" className={s.card}>
-        {title}
+        <span className={s.title}>{title}</span>
       </Card>
     </div>
   );
