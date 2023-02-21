@@ -17,3 +17,9 @@
 .title {
   font-size: 22px;
 }
+
+.link {
+  text-decoration: underline;
+  font-style: italic;
+  cursor: pointer;
+}

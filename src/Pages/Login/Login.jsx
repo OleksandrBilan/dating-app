@@ -15,7 +15,7 @@ export function Login() {
       .then((response) => {
         const token = response.data.accessToken;
         const expiresAt = response.data.expiresAt;
-        AuthService.setCookie("token", token, expiresAt);
+        AuthService.setAuthTokenToCookie(token, expiresAt);
         AuthService.setAuthTokenToAxios(token);
         navigate("/");
       })

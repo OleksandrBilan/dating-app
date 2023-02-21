@@ -9,23 +9,19 @@ export class AuthService {
     }
   }
 
-  static getCookie(cname) {
-    let name = cname + "=";
+  static getToken() {
     let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(";");
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == " ") {
-        c = c.substring(1);
-      }
-      if (c.indexOf(cname) == 0) {
-        return c.substring(cname.length, c.length);
-      }
+    let tokenNameIndex = decodedCookie.indexOf("token");
+    if (tokenNameIndex == -1) {
+      return null;
     }
-    return "";
+
+    let tokenStartIndex = tokenNameIndex + "token".length + 1;
+    return decodedCookie.substring(tokenStartIndex);
   }
 
-  static setCookie(cname, cvalue, expiresAt) {
-    document.cookie = `${cname}=${cvalue};expires=${expiresAt};path=/`;
+  static setAuthTokenToCookie(token, expiresAt) {
+    let expireDate = new Date(expiresAt);
+    document.cookie = `token=${token};expires=${expireDate.toUTCString()};path=/`;
   }
 }

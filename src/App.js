@@ -1,9 +1,17 @@
-import axios from "axios";
-import { API_URL } from "./config";
+import { AppRoutes } from "./Components/AppRoutes/AppRoutes";
+import { AuthService } from "./Services/auth";
 
 function App() {
-  axios.get(`${API_URL}/test/test`).then((response) => alert("success"));
-  return <div className="App">APP</div>;
+  const token = AuthService.getToken();
+  if (token) {
+    AuthService.setAuthTokenToAxios(token);
+  }
+
+  return (
+    <div className="App">
+      <AppRoutes />
+    </div>
+  );
 }
 
 export default App;

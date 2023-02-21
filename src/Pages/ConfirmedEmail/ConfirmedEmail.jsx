@@ -17,7 +17,10 @@ export function ConfirmedEmail() {
         setTitle(
           <div>
             Your email is successfully confirmed! You can now{" "}
-            <a onClick={() => navigate("/login")}>log in</a> :)
+            <span className={s.link}>
+              <a onClick={() => navigate("/login")}>log in</a>
+            </span>{" "}
+            :)
           </div>
         );
       })

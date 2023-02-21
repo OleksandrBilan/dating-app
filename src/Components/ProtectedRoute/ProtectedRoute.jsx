@@ -3,7 +3,7 @@ import { AuthService } from "../../Services/auth";
 
 export function ProtectedRoute({ children }) {
   function hasJWT() {
-    return AuthService.getCookie("token") ? true : false;
+    return AuthService.getToken() ? true : false;
   }
 
   if (!hasJWT()) {
