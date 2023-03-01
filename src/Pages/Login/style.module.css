@@ -18,3 +18,15 @@
   align-self: center;
   font-size: 22px;
 }
+
+.register_span {
+  font-size: 22px;
+  width: 100%;
+  text-align: center;
+}
+
+.link {
+  text-decoration: underline;
+  font-style: italic;
+  cursor: pointer;
+}

@@ -3,20 +3,20 @@ import { Register } from "../../Pages/Register/Register";
 import { ConfirmedEmail } from "../../Pages/ConfirmedEmail/ConfirmedEmail";
 import { Login } from "../../Pages/Login/Login";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
-import { Test } from "../Test";
+import { Home } from "../../Pages/Home/Home";
 
 export function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="user/new" element={<Register />} />
+        <Route path="register" element={<Register />} />
         <Route path="confirmEmail/:userId" element={<ConfirmedEmail />} />
         <Route path="login" element={<Login />} />
         <Route
           path="/"
           element={
             <ProtectedRoute>
-              <Test />
+              <Home />
             </ProtectedRoute>
           }
         />

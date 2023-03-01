@@ -24,4 +24,12 @@ export class AuthService {
     let expireDate = new Date(expiresAt);
     document.cookie = `token=${token};expires=${expireDate.toUTCString()};path=/`;
   }
+
+  static deleteAuthTokenCookie() {
+    document.cookie = "token=; Max-Age=-99999999;";
+  }
+
+  static removeAuthTokenFromAxios() {
+    delete axios.defaults.headers.common["Authorization"];
+  }
 }
