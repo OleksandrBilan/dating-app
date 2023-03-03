@@ -4,10 +4,14 @@ import { QuestionnaireForm } from "../../Components/QuestionnaireForm/Questionna
 import { CustomNavbar } from "../../Components/CustomNavbar/CustomNavbar";
 
 export function AdminHome() {
+  if (document.body.style.cursor == "wait") {
+    document.body.style.cursor = "default";
+  }
+
   return (
     <div className={s.container}>
       <CustomNavbar />
-      <Card className={s.card} border="primary">
+      <Card className={s.card} border="dark">
         <QuestionnaireForm />
       </Card>
     </div>

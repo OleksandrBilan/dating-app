@@ -32,4 +32,26 @@ export class AuthService {
   static removeAuthTokenFromAxios() {
     delete axios.defaults.headers.common["Authorization"];
   }
+
+  static saveUserInfo(user) {
+    try {
+      const serializedInfo = JSON.stringify(user);
+      localStorage.setItem("user", serializedInfo);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  static getUserInfo() {
+    try {
+      const serializedInfo = localStorage.getItem("user");
+      if (serializedInfo == null) {
+        return null;
+      }
+      return JSON.parse(serializedInfo);
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
+  }
 }

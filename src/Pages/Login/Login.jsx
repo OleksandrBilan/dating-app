@@ -5,12 +5,9 @@ import { API_URL } from "../../config";
 import { useNavigate } from "react-router-dom";
 import { AuthService } from "../../Services/auth";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { setUserAction } from "../../Store/auth/auth-slice";
 
 export function Login() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   function onSubmit(formValues) {
     document.body.style.cursor = "wait";
@@ -21,7 +18,7 @@ export function Login() {
         const expiresAt = response.data.expiresAt;
         AuthService.setAuthTokenToCookie(token, expiresAt);
         AuthService.setAuthTokenToAxios(token);
-        dispatch(setUserAction({ newUser: response.data.user }));
+        AuthService.saveUserInfo(response.data.user);
         navigate("/");
       })
       .catch((error) => {
