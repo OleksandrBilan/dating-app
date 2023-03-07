@@ -21,7 +21,7 @@ export function CustomNavbar() {
           Dating App
         </Navbar.Brand>
         <Navbar.Collapse className="justify-content-end">
-          <Nav className="me-auto">
+          <Nav className="ml-auto">
             <Nav.Link href="" onClick={OnLogOut}>
               Log Out
             </Nav.Link>

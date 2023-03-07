@@ -22,8 +22,8 @@ export function QuestionnaireForm() {
 
   function ShowQuestion(question) {
     return (
-      <div className={s.section}>
-        <div className={s.question} key={question.id}>
+      <div className={s.section} key={`${question.id}_section`}>
+        <div className={s.question} key={`${question.id}_question`}>
           <input
             type="text"
             name={question.id}
@@ -31,20 +31,20 @@ export function QuestionnaireForm() {
             onChange={updateQuestionName}
             defaultValue={question.name}
           />
-          <div className={s.buttons}>
-            <div className={s.tooltip}>
-              <span class={s.tooltiptext}>Save question with answers</span>
+          <div className={s.buttons} key={`${question.id}_buttons`}>
+            <div className={s.tooltip} key={`${question.id}_save`}>
+              <span className={s.tooltiptext}>Save question and answers</span>
               <PatchCheck fill="green" className={s.save_icon} />
             </div>
-            <div className={s.tooltip}>
-              <span class={s.tooltiptext}>Delete question with answers</span>
+            <div className={s.tooltip} key={`${question.id}_delete`}>
+              <span className={s.tooltiptext}>Delete question and answers</span>
               <XCircle fill="red" className={s.delete_icon} />
             </div>
           </div>
         </div>
-        <div className={s.answers}>
+        <div className={s.answers} key={`${question.id}_answers`}>
           {question.answers.map((a) => (
-            <div className={s.answer}>
+            <div className={s.answer} key={`${question.id}_answer_${a}`}>
               <input
                 type="text"
                 name={a}
