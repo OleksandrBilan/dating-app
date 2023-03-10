@@ -3,7 +3,7 @@ import { QuestionnaireForm } from "../../Components/QuestionnaireForm/Questionna
 import { CustomNavbar } from "../../Components/CustomNavbar/CustomNavbar";
 
 export function AdminHome() {
-  if (document.body.style.cursor == "wait") {
+  if (document.body.style.cursor === "wait") {
     document.body.style.cursor = "default";
   }
 
