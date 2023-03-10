@@ -23,7 +23,7 @@ export function QuestionnaireForm() {
   function ShowQuestion(question) {
     return (
       <div className={s.section} key={`${question.id}_section`}>
-        <div className={s.question} key={`${question.id}_question`}>
+        <div className={s.question}>
           <input
             type="text"
             name={question.id}
@@ -31,29 +31,36 @@ export function QuestionnaireForm() {
             onChange={updateQuestionName}
             defaultValue={question.name}
           />
-          <div className={s.buttons} key={`${question.id}_buttons`}>
-            <div className={s.tooltip} key={`${question.id}_save`}>
-              <span className={s.tooltiptext}>Save question and answers</span>
+          <div className={s.buttons}>
+            <div className={s.tooltip}>
+              <span className={s.tooltiptext}>Save question text</span>
               <PatchCheck fill="green" className={s.save_icon} />
             </div>
-            <div className={s.tooltip} key={`${question.id}_delete`}>
+            <div className={s.tooltip}>
               <span className={s.tooltiptext}>Delete question and answers</span>
               <XCircle fill="red" className={s.delete_icon} />
             </div>
           </div>
         </div>
-        <div className={s.answers} key={`${question.id}_answers`}>
+        <div className={s.answers}>
           {question.answers.map((a) => (
-            <div className={s.answer} key={`${question.id}_answer_${a}`}>
+            <div className={s.answer} key={`${question.id}_answer_${a.id}`}>
               <input
                 type="text"
-                name={a}
+                name={a.id}
                 className={`form-control ${s.answer_name}`}
                 onChange={updateAnswer}
-                defaultValue={a}
+                defaultValue={a.value}
               />
               <div className={s.buttons}>
-                <XCircle fill="red" className={s.delete_icon} />
+                <div className={s.tooltip}>
+                  <span className={s.tooltiptext}>Save answer text</span>
+                  <PatchCheck fill="green" className={s.save_icon} />
+                </div>
+                <div className={s.tooltip}>
+                  <span className={s.tooltiptext}>Delete answer</span>
+                  <XCircle fill="red" className={s.delete_icon} />
+                </div>
               </div>
             </div>
           ))}

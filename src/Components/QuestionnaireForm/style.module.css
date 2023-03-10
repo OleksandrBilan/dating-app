@@ -3,7 +3,9 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  gap: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .section {
@@ -13,22 +15,11 @@
   height: auto;
 }
 
-.question_name,
-.answer_name {
-  margin-top: 2px;
-  margin-bottom: 2px;
-  width: 95%;
-}
-
 .question {
-  width: 98%;
-  margin-left: 1%;
   display: flex;
 }
 
 .answers {
-  width: 96%;
-  margin-left: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,8 +27,6 @@
 }
 
 .answer {
-  width: 98%;
-  margin-left: 1%;
   display: flex;
 }
 
@@ -45,12 +34,10 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 5%;
 }
 
 .save_icon,
 .delete_icon {
-  height: 100%;
   cursor: pointer;
 }
 
