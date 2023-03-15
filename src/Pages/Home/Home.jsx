@@ -1,7 +1,7 @@
 import { AdminHome } from "../AdminHome/AdminHome";
 import { AuthService } from "../../Services/auth";
 
-const Home = () => {
+export function Home() {
   const user = AuthService.getUserInfo();
   if (user) {
     let isAdmin = user.roles.includes("Admin");
@@ -9,6 +9,4 @@ const Home = () => {
   }
 
   return <span>ERROR: No user info</span>;
-};
-
-export default Home;
+}

@@ -2,7 +2,10 @@ import s from "./style.module.css";
 import QuestionnaireForm from "../../Components/QuestionnaireForm/QuestionnaireForm";
 import { CustomNavbar } from "../../Components/CustomNavbar/CustomNavbar";
 
-const AdminHome = () => {
+export function AdminHome() {
+  if (document.body.style.cursor === "wait")
+    document.body.style.cursor = "default";
+
   return (
     <div className={s.container}>
       <CustomNavbar />
@@ -11,6 +14,4 @@ const AdminHome = () => {
       </div>
     </div>
   );
-};
-
-export default AdminHome;
+}
