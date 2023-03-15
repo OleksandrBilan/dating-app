@@ -4,6 +4,7 @@ import { ConfirmedEmail } from "../../Pages/ConfirmedEmail/ConfirmedEmail";
 import { Login } from "../../Pages/Login/Login";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { Home } from "../../Pages/Home/Home";
+import { Questionnaire } from "../../Pages/Questionnaire/Questionnaire";
 
 export function AppRoutes() {
   return (
@@ -17,6 +18,14 @@ export function AppRoutes() {
           element={
             <ProtectedRoute>
               <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/questionnaire"
+          element={
+            <ProtectedRoute>
+              <Questionnaire />
             </ProtectedRoute>
           }
         />

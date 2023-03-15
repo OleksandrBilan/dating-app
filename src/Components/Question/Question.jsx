@@ -1,4 +1,10 @@
-import { CheckCircle, Pencil, Trash, X } from "react-bootstrap-icons";
+import {
+  CheckCircle,
+  Pencil,
+  PlusCircle,
+  Trash,
+  X,
+} from "react-bootstrap-icons";
 import Modal from "../conmmon/Modal";
 import ToolTip from "../conmmon/ToolTip";
 import useToggle from "../../hooks/useToggle";
@@ -72,6 +78,18 @@ const Question = ({ questionData }) => {
                 </div>
               </div>
             ))}
+            <div className={s.addAnswerButton}>
+              <ToolTip
+                tooltiptext="Add answer"
+                element={
+                  <PlusCircle
+                    fill="black"
+                    size={27}
+                    className={s.addAnswerIcon}
+                  />
+                }
+              />
+            </div>
           </div>
         </div>
       </Modal>

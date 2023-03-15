@@ -1,17 +1,17 @@
 import s from "./style.module.css";
-import QuestionnaireForm from "../../Components/QuestionnaireForm/QuestionnaireForm";
 import { CustomNavbar } from "../../Components/CustomNavbar/CustomNavbar";
+import { AuthService } from "../../Services/auth";
 
 export function AdminHome() {
   if (document.body.style.cursor === "wait")
     document.body.style.cursor = "default";
 
+  const name = AuthService.getUserInfo().name;
+
   return (
     <div className={s.container}>
       <CustomNavbar />
-      <div className={s.card}>
-        <QuestionnaireForm />
-      </div>
+      <h1>Welcome, {name}</h1>
     </div>
   );
 }

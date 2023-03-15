@@ -15,6 +15,7 @@ h3 {
   gap: 5px;
 }
 
+.addAnswerIcon,
 .saveIcon,
 .deleteIcon {
   cursor: pointer;
@@ -52,4 +53,9 @@ h3 {
 
 .answerInput {
   width: 90%;
+}
+
+.addAnswerButton {
+  display: flex;
+  justify-content: center;
 }
