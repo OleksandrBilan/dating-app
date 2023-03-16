@@ -11,7 +11,7 @@ import { QuestionForm } from "../QuestionForm/QuestionForm";
 
 const QuestionnaireForm = () => {
   const [questionnaire, setQuestionnaire] = useState([]);
-  const editToggle = useToggle();
+  const addToggle = useToggle();
 
   useEffect(() => {
     axios
@@ -21,6 +21,23 @@ const QuestionnaireForm = () => {
       })
       .catch((error) => alert("Can not load the questionnaire :("));
   }, []);
+
+  function onQuestionAdd(question, answers) {
+    const newQuestion = { question: question, answers: answers };
+    axios
+      .post(`${API_URL}/questionnaire/addQuestion`, newQuestion)
+      .then((response) => {
+        axios
+          .get(`${API_URL}/questionnaire/getQuestionnaire`)
+          .then((response) => {
+            setQuestionnaire(response.data);
+          })
+          .catch((error) => alert("Can not load the questionnaire :("));
+      })
+      .catch((error) => {
+        alert("Can not create the question :(");
+      });
+  }
 
   return (
     <ul className={s.container}>
@@ -35,23 +52,23 @@ const QuestionnaireForm = () => {
               fill="black"
               size={27}
               className={s.addQuestionIcon}
-              onClick={() => editToggle.on()}
+              onClick={() => addToggle.on()}
             />
           }
         />
       </div>
-      <Modal show={editToggle}>
+      <Modal show={addToggle}>
         <div className={s.editModal}>
           <X
             fill="black"
             size={30}
-            onClick={() => editToggle.off()}
+            onClick={() => addToggle.off()}
             className={s.exitIcon}
           />
           <div className={s.title}>
             <h4>Add question</h4>
           </div>
-          <QuestionForm />
+          <QuestionForm onSubmit={onQuestionAdd} toggle={addToggle} />
         </div>
       </Modal>
     </ul>

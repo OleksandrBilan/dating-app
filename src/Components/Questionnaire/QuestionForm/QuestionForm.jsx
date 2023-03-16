@@ -1,4 +1,4 @@
-import { PlusCircle } from "react-bootstrap-icons";
+import { PlusCircle, Trash } from "react-bootstrap-icons";
 import { ButtonPrimary } from "../../common/ButtonPrimary/ButtonPrimary";
 import ToolTip from "../../common/ToolTip";
 import s from "./style.module.css";
@@ -6,9 +6,10 @@ import { FieldError } from "../../common/FieldError/FieldError";
 import { useState } from "react";
 import { ValidatorService } from "../../../Services/validator";
 
-export function QuestionForm({ onSubmit }) {
+export function QuestionForm({ onSubmit, toggle }) {
   const [formValues, setFormValues] = useState({ question: "" });
   const [formErrors, setFormErrors] = useState({ question: true });
+  const [answers, setAnswers] = useState([]);
 
   function updateFormValues(e) {
     const name = e.target.name;
@@ -33,8 +34,6 @@ export function QuestionForm({ onSubmit }) {
     return false;
   }
 
-  const [answers, setAnswers] = useState([]);
-
   function onAddAnswer() {
     let newAnswers = [...answers];
     newAnswers.push("");
@@ -47,9 +46,20 @@ export function QuestionForm({ onSubmit }) {
     setAnswers(newAnswers);
   }
 
+  function onAnswerDelete(index) {
+    let newAnswers = [...answers];
+    newAnswers.splice(index, 1);
+    setAnswers(newAnswers);
+  }
+
+  function onSave() {
+    onSubmit(formValues.question, answers);
+    toggle.off();
+  }
+
   return (
     <div className={s.container}>
-      <div className={`mb-5 ${s.all_inputs}`}>
+      <div className={`mb-5 ${s.questionInput}`}>
         <label className="form-label">Question</label>
         <input
           type="text"
@@ -61,13 +71,25 @@ export function QuestionForm({ onSubmit }) {
       </div>
       <div className={s.answers}>
         {answers.map((a, i) => (
-          <div className={`mb-5 ${s.all_inputs}`}>
-            <input
-              type="text"
-              name={i}
-              className="form-control"
-              onChange={updateAnswer}
-              defaultValue={a}
+          <div className={s.answer} key={i}>
+            <div className={`mb-5 ${s.answerInput}`}>
+              <input
+                type="text"
+                name={i}
+                className="form-control"
+                onChange={updateAnswer}
+                defaultValue={a}
+              />
+            </div>
+            <ToolTip
+              tooltiptext="Delete answer"
+              element={
+                <Trash
+                  fill="black"
+                  className={s.deleteIcon}
+                  onClick={() => onAnswerDelete(i)}
+                />
+              }
             />
           </div>
         ))}
@@ -86,10 +108,7 @@ export function QuestionForm({ onSubmit }) {
         />
       </div>
       <div className={s.saveButton}>
-        <ButtonPrimary
-          isDisabled={hasError()}
-          onClick={() => onSubmit(formValues)}
-        >
+        <ButtonPrimary isDisabled={hasError()} onClick={onSave}>
           Save
         </ButtonPrimary>
       </div>
