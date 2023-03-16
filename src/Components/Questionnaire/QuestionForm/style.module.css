@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.addAnswerButton,
+.saveButton {
+  align-self: center;
+}
+
+.addAnswerIcon {
+  cursor: pointer;
+}

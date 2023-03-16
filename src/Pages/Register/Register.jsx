@@ -34,7 +34,7 @@ export function Register() {
 
   return (
     <div className={s.container}>
-      <Card className={s.card} border="primary">
+      <Card className={s.card} border="dark">
         <div className={s.progress_bar}>
           <ProgressBar
             now={progressStage * 33.3}

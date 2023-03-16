@@ -29,7 +29,7 @@ export function Login() {
 
   return (
     <div className={s.container}>
-      <Card className={s.card} border="primary">
+      <Card className={s.card} border="dark">
         <div className={s.title}>
           <span>Please, enter your credentials</span>
         </div>

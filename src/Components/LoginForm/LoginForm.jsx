@@ -1,8 +1,8 @@
 import s from "./style.module.css";
-import { FieldError } from "../FieldError/FieldError";
+import { FieldError } from "../common/FieldError/FieldError";
 import { useState } from "react";
 import { ValidatorService } from "../../Services/validator";
-import { ButtonPrimary } from "../ButtonPrimary/ButtonPrimary";
+import { ButtonPrimary } from "../common/ButtonPrimary/ButtonPrimary";
 
 const VALIDATOR = {
   email: (value) => {

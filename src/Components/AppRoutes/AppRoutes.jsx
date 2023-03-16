@@ -2,9 +2,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Register } from "../../Pages/Register/Register";
 import { ConfirmedEmail } from "../../Pages/ConfirmedEmail/ConfirmedEmail";
 import { Login } from "../../Pages/Login/Login";
-import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { Home } from "../../Pages/Home/Home";
 import { Questionnaire } from "../../Pages/Questionnaire/Questionnaire";
+import { ProtectedRoute } from "../common/ProtectedRoute/ProtectedRoute";
 
 export function AppRoutes() {
   return (

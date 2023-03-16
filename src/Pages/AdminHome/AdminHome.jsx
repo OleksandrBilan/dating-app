@@ -1,6 +1,6 @@
 import s from "./style.module.css";
-import { CustomNavbar } from "../../Components/CustomNavbar/CustomNavbar";
 import { AuthService } from "../../Services/auth";
+import { CustomNavbar } from "../../Components/common/CustomNavbar/CustomNavbar";
 
 export function AdminHome() {
   if (document.body.style.cursor === "wait")

@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
-import { AuthService } from "../../Services/auth";
+import { AuthService } from "../../../Services/auth";
 import s from "./style.module.css";
 
 export function CustomNavbar() {

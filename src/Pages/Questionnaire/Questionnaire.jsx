@@ -1,6 +1,6 @@
 import s from "./style.module.css";
-import QuestionnaireForm from "../../Components/QuestionnaireForm/QuestionnaireForm";
-import { CustomNavbar } from "../../Components/CustomNavbar/CustomNavbar";
+import QuestionnaireForm from "../../Components/Questionnaire/QuestionnaireForm/QuestionnaireForm";
+import { CustomNavbar } from "../../Components/common/CustomNavbar/CustomNavbar";
 
 export function Questionnaire() {
   return (

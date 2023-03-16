@@ -5,13 +5,14 @@ import {
   Trash,
   X,
 } from "react-bootstrap-icons";
-import Modal from "../conmmon/Modal";
-import ToolTip from "../conmmon/ToolTip";
-import useToggle from "../../hooks/useToggle";
+import Modal from "../../common/Modal";
+import ToolTip from "../../common/ToolTip";
+import useToggle from "../../../hooks/useToggle";
 import s from "./styles.module.css";
 
 const Question = ({ questionData }) => {
   const editToggle = useToggle();
+
   return (
     <div className={s.questionContainer} key={`q${questionData.id}`}>
       <h3>{questionData?.name}</h3>
@@ -39,6 +40,9 @@ const Question = ({ questionData }) => {
             onClick={() => editToggle.off()}
             className={s.exitIcon}
           />
+          <div className={s.title}>
+            <h4>Edit question</h4>
+          </div>
           <div className={s.editQuestion}>
             <div className={`mb-5 ${s.questionInput}`}>
               <input

@@ -1,13 +1,13 @@
 import s from "./style.module.css";
 import Form from "react-bootstrap/Form";
-import { FieldError } from "../FieldError/FieldError";
 import { useEffect, useState } from "react";
 import { ValidatorService } from "../../Services/validator";
-import { ButtonPrimary } from "../ButtonPrimary/ButtonPrimary";
 import { Country, City } from "country-state-city";
 import { Typeahead } from "react-bootstrap-typeahead";
 import axios from "axios";
 import { API_URL } from "../../config";
+import { ButtonPrimary } from "../common/ButtonPrimary/ButtonPrimary";
+import { FieldError } from "../common/FieldError/FieldError";
 
 const VALIDATOR = {
   name: (value) => {
