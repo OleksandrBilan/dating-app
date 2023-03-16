@@ -11,6 +11,7 @@ import { QuestionForm } from "../QuestionForm/QuestionForm";
 
 const QuestionnaireForm = () => {
   const [questionnaire, setQuestionnaire] = useState([]);
+  const [reload, setReload] = useState(0);
   const addToggle = useToggle();
 
   useEffect(() => {
@@ -20,7 +21,7 @@ const QuestionnaireForm = () => {
         setQuestionnaire(response.data);
       })
       .catch((error) => alert("Can not load the questionnaire :("));
-  }, []);
+  }, [reload]);
 
   function onQuestionAdd(question, answers) {
     const newQuestion = { question: question, answers: answers };
@@ -39,10 +40,80 @@ const QuestionnaireForm = () => {
       });
   }
 
+  function onQuestionDelete(id) {
+    if (window.confirm("Delete the question?")) {
+      axios
+        .delete(`${API_URL}/questionnaire/deleteQuestion?questionId=${id}`)
+        .then((response) => {
+          setReload(reload + 1);
+        })
+        .catch((err) => {
+          alert("Can't delete the question :(");
+        });
+    }
+  }
+
+  function onQuestionSave(id, text) {
+    axios
+      .put(`${API_URL}/questionnaire/changeQuestion`, { id: id, value: text })
+      .then((response) => {
+        setReload(reload + 1);
+      })
+      .catch((err) => {
+        alert("Can't change the question :(");
+      });
+  }
+
+  function onAnswerDelete(id) {
+    axios
+      .delete(`${API_URL}/questionnaire/deleteAnswer?answerId=${id}`)
+      .then((response) => {
+        setReload(reload + 1);
+      })
+      .catch((err) => {
+        alert("Can't delete the answer :(");
+      });
+  }
+
+  function onAnswerSave(questionId, answerId, text) {
+    if (answerId > 0) {
+      axios
+        .put(`${API_URL}/questionnaire/changeAnswer`, {
+          id: answerId,
+          value: text,
+        })
+        .then((response) => {
+          setReload(reload + 1);
+        })
+        .catch((err) => {
+          alert("Can't change the answer :(");
+        });
+    } else {
+      axios
+        .post(`${API_URL}/questionnaire/addAnswer`, {
+          id: questionId,
+          value: text,
+        })
+        .then((response) => {
+          setReload(reload + 1);
+        })
+        .catch((err) => {
+          alert("Can't add the answer :(");
+        });
+    }
+  }
+
   return (
     <ul className={s.container}>
       {questionnaire?.map((questionData) => (
-        <Question key={questionData.id} questionData={questionData} />
+        <Question
+          key={questionData.id}
+          questionData={questionData}
+          onQuestionDelete={onQuestionDelete}
+          onQuestionSave={onQuestionSave}
+          onAnswerDelete={onAnswerDelete}
+          onAnswerSave={onAnswerSave}
+        />
       ))}
       <div className={s.addQuestionButton}>
         <ToolTip

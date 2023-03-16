@@ -6,6 +6,12 @@
   justify-content: center;
 }
 
+.answersContainer {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 h3 {
   margin: 0;
 }
@@ -22,7 +28,7 @@ h3 {
 }
 
 .editModal {
-  height: fit-content;
+  height: 70vh;
   width: 30vw;
   border-radius: 15px;
   padding: 15px;

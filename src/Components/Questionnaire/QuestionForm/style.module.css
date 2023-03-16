@@ -2,9 +2,12 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+  height: 70vh;
+}
+
+.answers {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 70vh;
 }
 
 .addAnswerButton,
