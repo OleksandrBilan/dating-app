@@ -6,15 +6,6 @@ import { FieldError } from "../../common/FieldError/FieldError";
 import { useState } from "react";
 import { ValidatorService } from "../../../Services/validator";
 
-const VALIDATOR = {
-  text: (value) => {
-    return ValidatorService.min(value);
-  },
-  answer: (value) => {
-    return ValidatorService.password(value);
-  },
-};
-
 export function QuestionForm({ onSubmit }) {
   const [formValues, setFormValues] = useState({ question: "" });
   const [formErrors, setFormErrors] = useState({ question: true });
@@ -47,7 +38,6 @@ export function QuestionForm({ onSubmit }) {
   function onAddAnswer() {
     let newAnswers = [...answers];
     newAnswers.push("");
-    console.log(newAnswers);
     setAnswers(newAnswers);
   }
 
@@ -70,7 +60,7 @@ export function QuestionForm({ onSubmit }) {
         <FieldError message={formErrors.question} />
       </div>
       <div className={s.answers}>
-        {answers.map((a, i) => {
+        {answers.map((a, i) => (
           <div className={`mb-5 ${s.all_inputs}`}>
             <input
               type="text"
@@ -79,8 +69,8 @@ export function QuestionForm({ onSubmit }) {
               onChange={updateAnswer}
               defaultValue={a}
             />
-          </div>;
-        })}
+          </div>
+        ))}
       </div>
       <div className={s.addAnswerButton}>
         <ToolTip
