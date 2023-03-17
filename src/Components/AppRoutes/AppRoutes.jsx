@@ -3,7 +3,7 @@ import { Register } from "../../Pages/Register/Register";
 import { ConfirmedEmail } from "../../Pages/ConfirmedEmail/ConfirmedEmail";
 import { Login } from "../../Pages/Login/Login";
 import { Home } from "../../Pages/Home/Home";
-import { Questionnaire } from "../../Pages/Questionnaire/Questionnaire";
+import { AdminQuestionnaire } from "../../Pages/AdminQuestionnaire/AdminQuestionnaire";
 import { ProtectedRoute } from "../common/ProtectedRoute/ProtectedRoute";
 
 export function AppRoutes() {
@@ -25,7 +25,7 @@ export function AppRoutes() {
           path="/questionnaire"
           element={
             <ProtectedRoute>
-              <Questionnaire />
+              <AdminQuestionnaire />
             </ProtectedRoute>
           }
         />

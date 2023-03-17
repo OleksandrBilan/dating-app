@@ -1,25 +1,32 @@
 import { useState } from "react";
-import { Card } from "react-bootstrap";
 import { LoginForm } from "../../Components/LoginForm/LoginForm";
 import s from "./style.module.css";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import axios from "axios";
 import { API_URL } from "../../config";
 import { UserInfoForm } from "../../Components/UserInfoForm/UserInfoForm";
+import { UserQuestionnaireForm } from "../../Components/Questionnaire/UserQuestionnaireForm/UserQuestionnaireForm";
 
 export function Register() {
   const [progressStage, setProgressStage] = useState(1);
+  const [credentials, setCredentials] = useState();
   const [userInfo, setUserInfo] = useState();
 
   function onLoginSubmit(formValues) {
-    setUserInfo({ email: formValues.email, password: formValues.password });
+    setCredentials({ email: formValues.email, password: formValues.password });
     setProgressStage(progressStage + 1);
   }
 
   function onUserInfoSubmit(formValues) {
-    let registrationInfo = {
+    setUserInfo(formValues);
+    setProgressStage(progressStage + 1);
+  }
+
+  function onQuestionnaireSubmit(selectedAnswers) {
+    const registrationInfo = {
+      ...credentials,
       ...userInfo,
-      ...formValues,
+      questionnaireAnswers: selectedAnswers,
     };
 
     axios
@@ -34,10 +41,10 @@ export function Register() {
 
   return (
     <div className={s.container}>
-      <Card className={s.card} border="dark">
+      <div className={s.card}>
         <div className={s.progress_bar}>
           <ProgressBar
-            now={progressStage * 33.3}
+            now={progressStage * 25}
             visuallyHidden
             style={{ borderRadius: 5 }}
             variant="primary"
@@ -45,21 +52,25 @@ export function Register() {
         </div>
         <div className={s.title}>
           <span>
-            {progressStage == 1
+            {progressStage === 1
               ? "Please, enter your credentials"
-              : progressStage == 2
+              : progressStage === 2
               ? "Please, enter info about yourself"
+              : progressStage === 3
+              ? "Please, fill the questionnaire"
               : "Please, confirm your email"}
           </span>
         </div>
-        {progressStage == 1 ? (
+        {progressStage === 1 ? (
           <LoginForm onSubmit={onLoginSubmit} />
-        ) : progressStage == 2 ? (
+        ) : progressStage === 2 ? (
           <UserInfoForm onSubmit={onUserInfoSubmit} />
+        ) : progressStage === 3 ? (
+          <UserQuestionnaireForm onSubmit={onQuestionnaireSubmit} />
         ) : (
           <div style={{ height: "90%" }}></div>
         )}
-      </Card>
+      </div>
     </div>
   );
 }

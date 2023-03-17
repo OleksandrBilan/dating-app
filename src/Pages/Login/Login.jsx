@@ -1,6 +1,5 @@
 import { LoginForm } from "../../Components/LoginForm/LoginForm";
 import s from "./style.module.css";
-import { Card } from "react-bootstrap";
 import { API_URL } from "../../config";
 import { useNavigate } from "react-router-dom";
 import { AuthService } from "../../Services/auth";
@@ -10,7 +9,6 @@ export function Login() {
   const navigate = useNavigate();
 
   function onSubmit(formValues) {
-    document.body.style.cursor = "wait";
     axios
       .post(`${API_URL}/auth/login`, formValues)
       .then((response) => {
@@ -29,7 +27,7 @@ export function Login() {
 
   return (
     <div className={s.container}>
-      <Card className={s.card} border="dark">
+      <div className={s.card}>
         <div className={s.title}>
           <span>Please, enter your credentials</span>
         </div>
@@ -41,7 +39,7 @@ export function Login() {
           </a>{" "}
           :)
         </span>
-      </Card>
+      </div>
     </div>
   );
 }

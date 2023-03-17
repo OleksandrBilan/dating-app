@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Card } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
 import { API_URL } from "../../config";
 import s from "./style.module.css";
@@ -31,9 +30,9 @@ export function ConfirmedEmail() {
 
   return (
     <div className={s.container}>
-      <Card border="primary" className={s.card}>
+      <div className={s.card}>
         <span className={s.title}>{title}</span>
-      </Card>
+      </div>
     </div>
   );
 }

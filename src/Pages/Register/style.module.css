@@ -2,16 +2,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 2%;
-  margin-bottom: 2%;
+  height: 100vh;
 }
 
 .card {
-  width: 40%;
+  width: 60%;
   height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  border-radius: 5px;
+  border: 1px solid #212529;
 }
 
 .progress_bar {

@@ -9,7 +9,7 @@ import useToggle from "../../../hooks/useToggle";
 import Modal from "../../common/Modal";
 import { QuestionForm } from "../QuestionForm/QuestionForm";
 
-const QuestionnaireForm = () => {
+export function AdminQuestionnaireForm() {
   const [questionnaire, setQuestionnaire] = useState([]);
   const [reload, setReload] = useState(0);
   const addToggle = useToggle();
@@ -41,7 +41,11 @@ const QuestionnaireForm = () => {
   }
 
   function onQuestionDelete(id) {
-    if (window.confirm("Delete the question?")) {
+    if (
+      window.confirm(
+        "Delete the question? (It will delete all the saved user answers)"
+      )
+    ) {
       axios
         .delete(`${API_URL}/questionnaire/deleteQuestion?questionId=${id}`)
         .then((response) => {
@@ -144,6 +148,4 @@ const QuestionnaireForm = () => {
       </Modal>
     </ul>
   );
-};
-
-export default QuestionnaireForm;
+}

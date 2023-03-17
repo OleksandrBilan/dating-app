@@ -5,11 +5,12 @@
   align-items: center;
 }
 
-.submit_btn {
-  align-self: center;
+.question {
+  width: 90%;
 }
 
-.all_inputs {
-  width: 80%;
-  align-self: center;
+.buttons {
+  display: flex;
+  width: 25%;
+  justify-content: space-evenly;
 }

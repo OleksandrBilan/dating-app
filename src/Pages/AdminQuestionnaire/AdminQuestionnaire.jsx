@@ -1,13 +1,13 @@
 import s from "./style.module.css";
-import QuestionnaireForm from "../../Components/Questionnaire/QuestionnaireForm/QuestionnaireForm";
+import { AdminQuestionnaireForm } from "../../Components/Questionnaire/AdminQuestionnaireForm/AdminQuestionnaireForm";
 import { CustomNavbar } from "../../Components/common/CustomNavbar/CustomNavbar";
 
-export function Questionnaire() {
+export function AdminQuestionnaire() {
   return (
     <div className={s.container}>
       <CustomNavbar />
       <div className={s.card}>
-        <QuestionnaireForm />
+        <AdminQuestionnaireForm />
       </div>
     </div>
   );
