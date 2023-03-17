@@ -13,8 +13,22 @@ export function Register() {
   const [userInfo, setUserInfo] = useState();
 
   function onLoginSubmit(formValues) {
-    setCredentials({ email: formValues.email, password: formValues.password });
-    setProgressStage(progressStage + 1);
+    axios
+      .get(`${API_URL}/auth/checkIfUserExists?email=${formValues.email}`)
+      .then((response) => {
+        if (response.data === true) {
+          alert("User with such email already exists");
+        } else {
+          setCredentials({
+            email: formValues.email,
+            password: formValues.password,
+          });
+          setProgressStage(progressStage + 1);
+        }
+      })
+      .catch((error) => {
+        alert("Error checking the email :(");
+      });
   }
 
   function onUserInfoSubmit(formValues) {
