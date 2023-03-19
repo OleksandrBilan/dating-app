@@ -31,13 +31,21 @@ export function CustomNavbar() {
           <Nav className="me-auto">
             {isAdmin ? (
               <>
-                <Nav.Link href="" onClick={() => navigate("/questionnaire")}>
+                <Nav.Link
+                  href=""
+                  onClick={() => navigate("/adminQuestionnaire")}
+                >
                   Questionnaire
                 </Nav.Link>
               </>
             ) : (
               <>
-                <Nav.Link href="">USER</Nav.Link>
+                <Nav.Link
+                  href=""
+                  onClick={() => navigate("/userQuestionnaire")}
+                >
+                  Questionnaire
+                </Nav.Link>
               </>
             )}
           </Nav>

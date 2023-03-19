@@ -14,3 +14,8 @@
   width: 25%;
   justify-content: space-evenly;
 }
+
+.answers {
+  display: flex;
+  flex-direction: column;
+}
