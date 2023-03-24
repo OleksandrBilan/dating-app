@@ -46,6 +46,12 @@ export function CustomNavbar() {
                 >
                   Questionnaire
                 </Nav.Link>
+                <Nav.Link
+                  href=""
+                  onClick={() => navigate("/usersRecommendations")}
+                >
+                  Users recommendations
+                </Nav.Link>
               </>
             )}
           </Nav>

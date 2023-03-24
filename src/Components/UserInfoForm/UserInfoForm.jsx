@@ -32,7 +32,6 @@ export function UserInfoForm({ onSubmit }) {
     country: { code: "", name: "" },
     city: { name: "", countryCode: "" },
     sexId: 0,
-    sexPreferencesId: 0,
     description: "",
   });
   const [formErrors, setFormErrors] = useState({
@@ -41,7 +40,6 @@ export function UserInfoForm({ onSubmit }) {
     country: true,
     city: true,
     sex: true,
-    sexPreferences: true,
     description: true,
   });
 
@@ -69,7 +67,7 @@ export function UserInfoForm({ onSubmit }) {
   }
 
   function onCountrySelect(value) {
-    if (value[0] != undefined) {
+    if (value[0]) {
       setFormValues({
         ...formValues,
         country: { name: value[0].label, code: value[0].id },
@@ -82,7 +80,7 @@ export function UserInfoForm({ onSubmit }) {
   }
 
   function onCitySelect(value) {
-    if (value[0] != undefined) {
+    if (value[0]) {
       setFormValues({
         ...formValues,
         city: { name: value[0].label, countryCode: value[0].countryCode },
@@ -95,7 +93,7 @@ export function UserInfoForm({ onSubmit }) {
   }
 
   function onSexSelect(value) {
-    if (value[0] != undefined) {
+    if (value[0]) {
       setFormValues({
         ...formValues,
         sexId: value[0].id,
@@ -103,19 +101,6 @@ export function UserInfoForm({ onSubmit }) {
       setFormErrors({
         ...formErrors,
         sex: false,
-      });
-    }
-  }
-
-  function onSexPreferencesSelect(value) {
-    if (value[0] != undefined) {
-      setFormValues({
-        ...formValues,
-        sexPreferencesId: value[0].id,
-      });
-      setFormErrors({
-        ...formErrors,
-        sexPreferences: false,
       });
     }
   }
@@ -136,8 +121,8 @@ export function UserInfoForm({ onSubmit }) {
 
   useEffect(() => {
     if (
-      formValues.country != undefined &&
-      formValues.country.code != undefined &&
+      formValues.country &&
+      formValues.country.code &&
       formValues.country.code.length > 0
     ) {
       let cities = City.getCitiesOfCountry(formValues.country.code).map((c) => {
@@ -188,16 +173,6 @@ export function UserInfoForm({ onSubmit }) {
       <div className={`mb-5 ${s.all_inputs}`}>
         <label className="form-label">Your sex</label>
         <Typeahead id="sex-selector" onChange={onSexSelect} options={sexData} />
-      </div>
-      <div className={`mb-5 ${s.all_inputs}`}>
-        <label className="form-label">
-          Sex of people you want to communicate with
-        </label>
-        <Typeahead
-          id="sex-preferences-selector"
-          onChange={onSexPreferencesSelect}
-          options={sexData}
-        />
       </div>
       <div className={`mb-5 ${s.all_inputs}`}>
         <label className="form-label">Write something about yourself</label>
