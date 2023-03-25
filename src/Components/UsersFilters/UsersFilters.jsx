@@ -16,6 +16,7 @@ export function UsersFilters({ onApply }) {
   const [countryCode, setCountryCode] = useState();
   const [cityId, setCityId] = useState();
   const [preferedSexId, setPreferedSexId] = useState();
+  const [useQuestionnaire, setUseQuestionnaire] = useState(true);
 
   useEffect(() => {
     axios.get(`${API_URL}/lookup/getCountries`).then((response) => {
@@ -57,7 +58,7 @@ export function UsersFilters({ onApply }) {
 
   function onCitySelect(value) {
     if (value[0]) {
-      setCityId(value[0].label);
+      setCityId(value[0].id);
     } else {
       setCityId(null);
     }
@@ -78,6 +79,7 @@ export function UsersFilters({ onApply }) {
       countryCode,
       cityId,
       preferedSexId,
+      useQuestionnaire,
     };
     onApply(formValues);
   }
@@ -125,6 +127,14 @@ export function UsersFilters({ onApply }) {
         <label className="form-label">Sex</label>
         <Typeahead id="sex-selector" onChange={onSexSelect} options={sexData} />
       </div>
+      <label>
+        <input
+          type="checkbox"
+          onChange={() => setUseQuestionnaire(!useQuestionnaire)}
+          checked={useQuestionnaire}
+        />
+        Use questionnaire answers
+      </label>
       <Button variant="primary" onClick={onApplyClick}>
         Apply
       </Button>

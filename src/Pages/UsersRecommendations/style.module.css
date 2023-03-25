@@ -2,4 +2,13 @@
   margin-top: 10vh;
   height: 90vh;
   display: flex;
+  justify-content: space-evenly;
+}
+
+.filters {
+  width: 20%;
+}
+
+.recommendedUsers {
+  width: 60%;
 }
