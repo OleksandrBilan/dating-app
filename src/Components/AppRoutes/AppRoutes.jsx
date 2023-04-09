@@ -7,6 +7,7 @@ import { AdminQuestionnaire } from "../../Pages/AdminQuestionnaire/AdminQuestion
 import { ProtectedRoute } from "../common/ProtectedRoute/ProtectedRoute";
 import { UserQuestionnaire } from "../../Pages/UserQuestionnaire/UserQuestionnaire";
 import { UsersRecommendations } from "../../Pages/UsersRecommendations/UsersRecommendations";
+import { EditUserProfile } from "../../Pages/EditUserProfile/EditUserProfile";
 
 export function AppRoutes() {
   return (
@@ -44,6 +45,14 @@ export function AppRoutes() {
           element={
             <ProtectedRoute>
               <UsersRecommendations />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/editUserProfile"
+          element={
+            <ProtectedRoute>
+              <EditUserProfile />
             </ProtectedRoute>
           }
         />

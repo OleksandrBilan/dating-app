@@ -21,7 +21,7 @@ const VALIDATOR = {
   },
 };
 
-export function UserInfoForm({ onSubmit }) {
+export function UserInfoForm({ onSubmit, userInfo }) {
   const [countriesData, setCountriesData] = useState([]);
   const [citiesData, setCitiesData] = useState([]);
   const [sexData, setSexData] = useState([]);
@@ -132,58 +132,114 @@ export function UserInfoForm({ onSubmit }) {
     }
   }, [formValues.country]);
 
+  useEffect(() => {
+    if (userInfo) {
+      setFormValues({
+        name: userInfo.name,
+        birthDate: userInfo.birthDate.substring(0, 10),
+        country: userInfo.country,
+        city: userInfo.city,
+        sexId: userInfo.sexId,
+        description: userInfo.description,
+      });
+      setFormErrors({
+        name: false,
+        birthDate: false,
+        country: false,
+        city: false,
+        sex: false,
+        description: false,
+      });
+    }
+  }, [userInfo]);
+
   return (
     <div className={s.container}>
-      <div className={`mb-5 ${s.all_inputs}`}>
-        <label className="form-label">Name</label>
-        <input
-          type="text"
-          name="name"
-          className="form-control"
-          onChange={updateFormValues}
-        />
-        <FieldError message={formErrors.name} />
-      </div>
-      <div className={`mb-5 ${s.all_inputs}`}>
-        <label className="form-label">Birth Date</label>
-        <input
-          type="date"
-          name="birthDate"
-          className="form-control"
-          onChange={updateFormValues}
-        />
-        <FieldError message={formErrors.birthDate} />
-      </div>
-      <div className={`mb-5 ${s.all_inputs}`}>
-        <label className="form-label">Country</label>
-        <Typeahead
-          id="country-selector"
-          onChange={onCountrySelect}
-          options={countriesData}
-        />
-      </div>
-      <div className={`mb-5 ${s.all_inputs}`}>
-        <label className="form-label">City</label>
-        <Typeahead
-          id="city-selector"
-          onChange={onCitySelect}
-          options={citiesData}
-        />
-      </div>
-      <div className={`mb-5 ${s.all_inputs}`}>
-        <label className="form-label">Your sex</label>
-        <Typeahead id="sex-selector" onChange={onSexSelect} options={sexData} />
-      </div>
-      <div className={`mb-5 ${s.all_inputs}`}>
-        <label className="form-label">Write something about yourself</label>
-        <Form.Control
-          as="textarea"
-          rows={3}
-          name="description"
-          onChange={updateFormValues}
-        />
-        <FieldError message={formErrors.description} />
-      </div>
+      {userInfo == null ? (
+        <>
+          <div className={`mb-5 ${s.all_inputs}`}>
+            <label className="form-label">Name</label>
+            <input
+              type="text"
+              name="name"
+              className="form-control"
+              onChange={updateFormValues}
+            />
+            <FieldError message={formErrors.name} />
+          </div>
+          <div className={`mb-5 ${s.all_inputs}`}>
+            <label className="form-label">Birth Date</label>
+            <input
+              type="date"
+              name="birthDate"
+              className="form-control"
+              onChange={updateFormValues}
+              defaultValue={formValues.birthDate}
+            />
+            <FieldError message={formErrors.birthDate} />
+          </div>
+          <div className={`mb-5 ${s.all_inputs}`}>
+            <label className="form-label">Country</label>
+            <Typeahead
+              id="country-selector"
+              onChange={onCountrySelect}
+              options={countriesData}
+              defaultInputValue={formValues.country.code}
+            />
+          </div>
+          <div className={`mb-5 ${s.all_inputs}`}>
+            <label className="form-label">City</label>
+            <Typeahead
+              id="city-selector"
+              onChange={onCitySelect}
+              options={citiesData}
+            />
+          </div>
+          <div className={`mb-5 ${s.all_inputs}`}>
+            <label className="form-label">Your sex</label>
+            <Typeahead
+              id="sex-selector"
+              onChange={onSexSelect}
+              options={sexData}
+            />
+          </div>
+          <div className={`mb-5 ${s.all_inputs}`}>
+            <label className="form-label">Write something about yourself</label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              name="description"
+              onChange={updateFormValues}
+            />
+            <FieldError message={formErrors.description} />
+          </div>
+        </>
+      ) : (
+        <>
+          <div className={`mb-5 ${s.all_inputs}`}>
+            <label className="form-label">Name</label>
+            <input
+              type="text"
+              name="name"
+              className="form-control"
+              onChange={updateFormValues}
+              defaultValue={formValues.name}
+            />
+            <FieldError message={formErrors.name} />
+          </div>
+          <div className={`mb-5 ${s.all_inputs}`}>
+            <label className="form-label">Write something about yourself</label>
+            <Form.Control
+              as="textarea"
+              rows={4}
+              name="description"
+              onChange={updateFormValues}
+              defaultValue={formValues.description}
+            />
+            <FieldError message={formErrors.description} />
+          </div>
+        </>
+      )}
       <div className={s.submit_btn}>
         <ButtonPrimary
           isDisabled={hasError()}

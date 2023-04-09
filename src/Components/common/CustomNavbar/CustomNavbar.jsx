@@ -52,6 +52,9 @@ export function CustomNavbar() {
                 >
                   Users recommendations
                 </Nav.Link>
+                <Nav.Link href="" onClick={() => navigate("/editUserProfile")}>
+                  Edit profile
+                </Nav.Link>
               </>
             )}
           </Nav>
