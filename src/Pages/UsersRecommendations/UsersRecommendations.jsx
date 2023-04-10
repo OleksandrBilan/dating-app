@@ -24,7 +24,9 @@ export function UsersRecommendations() {
   function onFiltersApply(formValues) {
     const parametersStr = prepareParameters(formValues);
     axios
-      .get(`${API_URL}/recommendations/getRecommendedUsers?${parametersStr}`)
+      .get(
+        `${API_URL}/recommendations/getRecommendedUsersByFilters?${parametersStr}`
+      )
       .then((response) => setRecommendedUsers(response.data))
       .catch((error) => alert("Can't load recommended users :("));
   }

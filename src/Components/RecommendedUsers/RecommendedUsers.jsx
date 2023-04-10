@@ -49,12 +49,12 @@ export function RecommendedUsers({ users }) {
       <div className={s.container}>
         <div className={s.top}>
           <div className={s.topInfo}>
-            <h2 className={s.name}>{users[currentUserIndex].name}</h2>
+            <h2 className={s.name}>{users[currentUserIndex].user.name}</h2>
             <span className={s.tag}>
               Age:{" "}
               {
                 <span className={s.infoLine}>
-                  {calculateAge(users[currentUserIndex].birthDate)}
+                  {calculateAge(users[currentUserIndex].user.birthDate)}
                 </span>
               }
             </span>
@@ -62,7 +62,10 @@ export function RecommendedUsers({ users }) {
               Sex:{" "}
               {
                 <span className={s.infoLine}>
-                  {sex.find((s) => s.id === users[currentUserIndex].sexId).name}
+                  {
+                    sex.find((s) => s.id === users[currentUserIndex].user.sexId)
+                      .name
+                  }
                 </span>
               }
             </span>
@@ -70,7 +73,7 @@ export function RecommendedUsers({ users }) {
               Country:{" "}
               {
                 <span className={s.infoLine}>
-                  {users[currentUserIndex].country.name}
+                  {users[currentUserIndex].user.country.name}
                 </span>
               }
             </span>
@@ -78,14 +81,14 @@ export function RecommendedUsers({ users }) {
               City:{" "}
               {
                 <span className={s.infoLine}>
-                  {users[currentUserIndex].city.name}
+                  {users[currentUserIndex].user.city.name}
                 </span>
               }
             </span>
             <div className={s.descriptionDiv}>
               <span className={s.tag}>Description: </span>
               <span className={s.infoLine}>
-                {users[currentUserIndex].description}
+                {users[currentUserIndex].user.description}
               </span>
             </div>
           </div>
