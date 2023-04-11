@@ -51,6 +51,16 @@ export function RecommendedUsers({ users }) {
           <div className={s.topInfo}>
             <h2 className={s.name}>{users[currentUserIndex].user.name}</h2>
             <span className={s.tag}>
+              Similarity:{" "}
+              {
+                <span className={s.infoLine}>
+                  {`${Math.floor(
+                    users[currentUserIndex].similarityScore * 100
+                  )}%`}
+                </span>
+              }
+            </span>
+            <span className={s.tag}>
               Age:{" "}
               {
                 <span className={s.infoLine}>

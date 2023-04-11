@@ -5,6 +5,7 @@ import { RecommendedUsers } from "../../Components/RecommendedUsers/RecommendedU
 import { UsersFilters } from "../../Components/UsersFilters/UsersFilters";
 import { API_URL } from "../../config";
 import s from "./style.module.css";
+import { AuthService } from "../../Services/auth";
 
 export function UsersRecommendations() {
   const [recommendedUsers, setRecommendedUsers] = useState([]);
@@ -18,15 +19,14 @@ export function UsersRecommendations() {
         parametersStr += k + "=" + formValues[k].toString();
       }
     });
+    parametersStr += "&userId=" + AuthService.getUserInfo().id;
     return parametersStr;
   }
 
   function onFiltersApply(formValues) {
     const parametersStr = prepareParameters(formValues);
     axios
-      .get(
-        `${API_URL}/recommendations/getRecommendedUsersByFilters?${parametersStr}`
-      )
+      .get(`${API_URL}/recommendations/getRecommendedUsers?${parametersStr}`)
       .then((response) => setRecommendedUsers(response.data))
       .catch((error) => alert("Can't load recommended users :("));
   }

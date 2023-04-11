@@ -28,7 +28,8 @@ export function UsersFilters({ onApply }) {
 
     axios.get(`${API_URL}/lookup/getSex`).then((response) => {
       const sexOptions = response.data.map((s) => {
-        return { label: s.name, id: s.id };
+        if (s.id === 1) return { label: "All", id: s.id };
+        else return { label: s.name, id: s.id };
       });
       setSexData(sexOptions);
     });
