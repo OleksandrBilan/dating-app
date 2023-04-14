@@ -25,3 +25,9 @@
   align-self: center;
   font-size: 22px;
 }
+
+.registerForm {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}

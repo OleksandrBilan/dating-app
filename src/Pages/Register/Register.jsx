@@ -6,11 +6,13 @@ import axios from "axios";
 import { API_URL } from "../../config";
 import { UserInfoForm } from "../../Components/UserInfoForm/UserInfoForm";
 import { UserQuestionnaireForm } from "../../Components/Questionnaire/UserQuestionnaireForm/UserQuestionnaireForm";
+import { ImageUploadForm } from "../../Components/ImageUploadForm/ImageUploadForm";
 
 export function Register() {
   const [progressStage, setProgressStage] = useState(1);
   const [credentials, setCredentials] = useState();
   const [userInfo, setUserInfo] = useState();
+  const [questionnaireAnswers, setQuestionnaireAnswers] = useState();
 
   function onLoginSubmit(formValues) {
     axios
@@ -37,20 +39,52 @@ export function Register() {
   }
 
   function onQuestionnaireSubmit(selectedAnswers) {
+    setQuestionnaireAnswers(selectedAnswers);
+    setProgressStage(progressStage + 1);
+  }
+
+  function uploadImage(userId, file) {
+    const formData = new FormData();
+    formData.append("image", file);
+    return axios({
+      method: "post",
+      url: `${API_URL}/user/uploadImage?userId=${userId}`,
+      data: formData,
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+  }
+
+  function onImageUpload(file) {
     const registrationInfo = {
       ...credentials,
       ...userInfo,
-      questionnaireAnswers: selectedAnswers,
+      questionnaireAnswers: questionnaireAnswers,
     };
 
     axios
       .post(`${API_URL}/auth/register`, registrationInfo)
       .then((response) => {
-        setProgressStage(progressStage + 1);
+        const userId = response.data;
+        uploadImage(userId, file)
+          .then((response) => setProgressStage(progressStage + 1))
+          .catch((error) => alert(`Can't upload the image, error: ${error}`));
       })
       .catch((error) => {
         alert(`Can't create a user, error: ${error}`);
       });
+  }
+
+  function onImageSkip() {
+    const registrationInfo = {
+      ...credentials,
+      ...userInfo,
+      questionnaireAnswers: questionnaireAnswers,
+    };
+
+    axios
+      .post(`${API_URL}/auth/register`, registrationInfo)
+      .then((response) => setProgressStage(progressStage + 1))
+      .catch((error) => alert(`Can't create a user, error: ${error}`));
   }
 
   return (
@@ -58,7 +92,7 @@ export function Register() {
       <div className={s.card}>
         <div className={s.progress_bar}>
           <ProgressBar
-            now={progressStage * 25}
+            now={progressStage * 20}
             visuallyHidden
             style={{ borderRadius: 5 }}
             variant="primary"
@@ -72,18 +106,24 @@ export function Register() {
               ? "Please, enter info about yourself"
               : progressStage === 3
               ? "Please, fill the questionnaire"
-              : "Please, confirm your email"}
+              : progressStage === 4
+              ? "Please, upload your picture"
+              : "That's all :) Please, confirm your email and log in ^_^"}
           </span>
         </div>
-        {progressStage === 1 ? (
-          <LoginForm onSubmit={onLoginSubmit} />
-        ) : progressStage === 2 ? (
-          <UserInfoForm onSubmit={onUserInfoSubmit} />
-        ) : progressStage === 3 ? (
-          <UserQuestionnaireForm onSubmit={onQuestionnaireSubmit} />
-        ) : (
-          <div style={{ height: "90%" }}></div>
-        )}
+        <div className={s.registerForm}>
+          {progressStage === 1 ? (
+            <LoginForm onSubmit={onLoginSubmit} />
+          ) : progressStage === 2 ? (
+            <UserInfoForm onSubmit={onUserInfoSubmit} />
+          ) : progressStage === 3 ? (
+            <UserQuestionnaireForm onSubmit={onQuestionnaireSubmit} />
+          ) : progressStage === 4 ? (
+            <ImageUploadForm onSubmit={onImageUpload} onSkip={onImageSkip} />
+          ) : (
+            <div style={{ height: "90%" }}></div>
+          )}
+        </div>
       </div>
     </div>
   );

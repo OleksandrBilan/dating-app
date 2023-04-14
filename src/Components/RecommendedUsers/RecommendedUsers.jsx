@@ -7,11 +7,34 @@ import s from "./style.module.css";
 export function RecommendedUsers({ users }) {
   const [currentUserIndex, setCurrentUserIndex] = useState(0);
   const [sex, setSex] = useState();
+  const [currentUserImageUrl, setCurrentUserImageUrl] = useState();
+
+  function setCurrentImage() {
+    if (users && users[currentUserIndex]) {
+      axios
+        .get(
+          `${API_URL}/user/getImage?userId=${users[currentUserIndex].user.id}`,
+          {
+            responseType: "blob",
+          }
+        )
+        .then((response) => {
+          const url = URL.createObjectURL(response.data);
+          setCurrentUserImageUrl(url);
+        })
+        .catch((error) => {
+          setCurrentUserImageUrl("");
+        });
+    } else {
+      setCurrentUserImageUrl("");
+    }
+  }
 
   useEffect(() => {
     axios.get(`${API_URL}/lookup/getSex`).then((response) => {
       setSex(response.data);
     });
+    setCurrentImage();
   }, []);
 
   useEffect(() => {
@@ -19,6 +42,10 @@ export function RecommendedUsers({ users }) {
       setCurrentUserIndex(0);
     }
   }, [users]);
+
+  useEffect(() => {
+    setCurrentImage();
+  }, [users, currentUserIndex]);
 
   function calculateAge(birthDate) {
     return Math.floor(
@@ -105,7 +132,7 @@ export function RecommendedUsers({ users }) {
           <div className={s.photo}>
             <img
               className={s.image}
-              src="https://picsum.photos/1000/1500"
+              src={currentUserImageUrl}
               alt="User Avatar"
             />
           </div>

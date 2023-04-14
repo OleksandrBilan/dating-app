@@ -1,3 +1,8 @@
+.container {
+  height: 100%;
+  width: 100%;
+}
+
 .imageUpload {
   display: flex;
   flex-direction: column;
@@ -26,4 +31,10 @@
 
 .imageUploadInput {
   display: none;
+}
+
+.buttons {
+  width: 32%;
+  display: flex;
+  justify-content: space-evenly;
 }

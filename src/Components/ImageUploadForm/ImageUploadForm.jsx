@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import s from "./style.module.css";
 import { Button } from "react-bootstrap";
 
-export function ImageUploadForm({ previewImageUrl, onSubmit }) {
+export function ImageUploadForm({ previewImageUrl, onSubmit, onSkip }) {
   const [image, setImage] = useState();
   const [previewUrl, setPreviewUrl] = useState();
 
@@ -58,7 +58,7 @@ export function ImageUploadForm({ previewImageUrl, onSubmit }) {
             />
           </label>
         </div>
-        <div>
+        <div className={s.buttons}>
           <Button
             type="submit"
             variant="primary"
@@ -66,6 +66,11 @@ export function ImageUploadForm({ previewImageUrl, onSubmit }) {
           >
             Upload
           </Button>
+          {onSkip && (
+            <Button variant="secondary" onClick={onSkip}>
+              Skip
+            </Button>
+          )}
         </div>
       </form>
     </div>
