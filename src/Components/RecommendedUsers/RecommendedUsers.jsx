@@ -3,17 +3,22 @@ import { useEffect, useState } from "react";
 import { CaretRightFill, HeartFill } from "react-bootstrap-icons";
 import { API_URL } from "../../config";
 import s from "./style.module.css";
+import { AuthService } from "../../Services/auth";
 
-export function RecommendedUsers({ users }) {
-  const [currentUserIndex, setCurrentUserIndex] = useState(0);
+export function RecommendedUsers({ usersRecommendations }) {
+  const [currentRecommendationIndex, setCurrentRecommendationIndex] =
+    useState(0);
   const [sex, setSex] = useState();
   const [currentUserImageUrl, setCurrentUserImageUrl] = useState();
 
   function setCurrentImage() {
-    if (users && users[currentUserIndex]) {
+    if (
+      usersRecommendations &&
+      usersRecommendations[currentRecommendationIndex]
+    ) {
       axios
         .get(
-          `${API_URL}/user/getImage?userId=${users[currentUserIndex].user.id}`,
+          `${API_URL}/user/getImage?userId=${usersRecommendations[currentRecommendationIndex].user.id}`,
           {
             responseType: "blob",
           }
@@ -38,14 +43,18 @@ export function RecommendedUsers({ users }) {
   }, []);
 
   useEffect(() => {
-    if (users && Array.isArray(users) && users.length > 0) {
-      setCurrentUserIndex(0);
+    if (
+      usersRecommendations &&
+      Array.isArray(usersRecommendations) &&
+      usersRecommendations.length > 0
+    ) {
+      setCurrentRecommendationIndex(0);
     }
-  }, [users]);
+  }, [usersRecommendations]);
 
   useEffect(() => {
     setCurrentImage();
-  }, [users, currentUserIndex]);
+  }, [usersRecommendations, currentRecommendationIndex]);
 
   function calculateAge(birthDate) {
     return Math.floor(
@@ -53,36 +62,46 @@ export function RecommendedUsers({ users }) {
     );
   }
 
-  function setNextUser() {
-    if (currentUserIndex === users.length - 1) {
+  function showNextRecommendation() {
+    if (currentRecommendationIndex === usersRecommendations.length - 1) {
       alert(
         "That's the last recommended user \n(set some other search filters to see more users)"
       );
     } else {
-      setCurrentUserIndex(currentUserIndex + 1);
+      setCurrentRecommendationIndex(currentRecommendationIndex + 1);
     }
   }
 
   function onLike() {
-    setNextUser();
+    const request = {
+      likingUserId: AuthService.getUserInfo().id,
+      likedUserId: usersRecommendations[currentRecommendationIndex].user.id,
+    };
+    axios
+      .post(`${API_URL}/recommendations/addUserLike`, request)
+      .then((response) => showNextRecommendation())
+      .catch((error) => alert("Error saving yout like :("));
   }
 
   function onSkip() {
-    setNextUser();
+    showNextRecommendation();
   }
 
-  if (users[currentUserIndex]) {
+  if (usersRecommendations[currentRecommendationIndex]) {
     return (
       <div className={s.container}>
         <div className={s.top}>
           <div className={s.topInfo}>
-            <h2 className={s.name}>{users[currentUserIndex].user.name}</h2>
+            <h2 className={s.name}>
+              {usersRecommendations[currentRecommendationIndex].user.name}
+            </h2>
             <span className={s.tag}>
               Similarity:{" "}
               {
                 <span className={s.infoLine}>
                   {`${Math.floor(
-                    users[currentUserIndex].similarityScore * 100
+                    usersRecommendations[currentRecommendationIndex]
+                      .similarityScore * 100
                   )}%`}
                 </span>
               }
@@ -91,7 +110,10 @@ export function RecommendedUsers({ users }) {
               Age:{" "}
               {
                 <span className={s.infoLine}>
-                  {calculateAge(users[currentUserIndex].user.birthDate)}
+                  {calculateAge(
+                    usersRecommendations[currentRecommendationIndex].user
+                      .birthDate
+                  )}
                 </span>
               }
             </span>
@@ -100,8 +122,12 @@ export function RecommendedUsers({ users }) {
               {
                 <span className={s.infoLine}>
                   {
-                    sex.find((s) => s.id === users[currentUserIndex].user.sexId)
-                      .name
+                    sex.find(
+                      (s) =>
+                        s.id ===
+                        usersRecommendations[currentRecommendationIndex].user
+                          .sexId
+                    ).name
                   }
                 </span>
               }
@@ -110,7 +136,10 @@ export function RecommendedUsers({ users }) {
               Country:{" "}
               {
                 <span className={s.infoLine}>
-                  {users[currentUserIndex].user.country.name}
+                  {
+                    usersRecommendations[currentRecommendationIndex].user
+                      .country.name
+                  }
                 </span>
               }
             </span>
@@ -118,14 +147,20 @@ export function RecommendedUsers({ users }) {
               City:{" "}
               {
                 <span className={s.infoLine}>
-                  {users[currentUserIndex].user.city.name}
+                  {
+                    usersRecommendations[currentRecommendationIndex].user.city
+                      .name
+                  }
                 </span>
               }
             </span>
             <div className={s.descriptionDiv}>
               <span className={s.tag}>Description: </span>
               <span className={s.infoLine}>
-                {users[currentUserIndex].user.description}
+                {
+                  usersRecommendations[currentRecommendationIndex].user
+                    .description
+                }
               </span>
             </div>
           </div>
@@ -151,7 +186,7 @@ export function RecommendedUsers({ users }) {
   } else {
     return (
       <h4>
-        Set up the Search Filters and press Apply to see recommended people :)
+        Set up the Search Filters and press Apply to see recommended users :)
       </h4>
     );
   }

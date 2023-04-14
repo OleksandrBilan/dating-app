@@ -38,7 +38,7 @@ export function UsersRecommendations() {
         <UsersFilters onApply={onFiltersApply} />
       </div>
       <div className={s.recommendedUsers}>
-        <RecommendedUsers users={recommendedUsers} />
+        <RecommendedUsers usersRecommendations={recommendedUsers} />
       </div>
     </div>
   );
