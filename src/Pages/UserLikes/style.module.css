@@ -1,0 +1,16 @@
+.container {
+  margin-top: 10vh;
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.recommendedUsers {
+  width: 60%;
+  height: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

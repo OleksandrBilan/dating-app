@@ -31,6 +31,16 @@ export function UsersRecommendations() {
       .catch((error) => alert("Can't load recommended users :("));
   }
 
+  function onUserLike(likedUserId) {
+    const request = {
+      likingUserId: AuthService.getUserInfo().id,
+      likedUserId: likedUserId,
+    };
+    axios
+      .post(`${API_URL}/recommendations/addUserLike`, request)
+      .catch((error) => alert("Error saving yout like :("));
+  }
+
   return (
     <div className={s.container}>
       <CustomNavbar />
@@ -38,7 +48,11 @@ export function UsersRecommendations() {
         <UsersFilters onApply={onFiltersApply} />
       </div>
       <div className={s.recommendedUsers}>
-        <RecommendedUsers usersRecommendations={recommendedUsers} />
+        <RecommendedUsers
+          usersRecommendations={recommendedUsers}
+          emptyRecommendationListMessage="Set up the Search Filters and press Apply to see recommended users :)"
+          onUserLike={onUserLike}
+        />
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
 import { AuthService } from "../../../Services/auth";
 import s from "./style.module.css";
+import { NavDropdown } from "react-bootstrap";
 
 export function CustomNavbar() {
   const navigate = useNavigate();
@@ -40,20 +41,34 @@ export function CustomNavbar() {
               </>
             ) : (
               <>
+                <NavDropdown title="Recommendations">
+                  <NavDropdown.Item
+                    href=""
+                    onClick={() => navigate("/usersRecommendations")}
+                  >
+                    Search users
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    href=""
+                    onClick={() => navigate("/userLikes")}
+                  >
+                    Who liked me
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    href=""
+                    onClick={() => navigate("/userMutualLikes")}
+                  >
+                    Mutual likes
+                  </NavDropdown.Item>
+                </NavDropdown>
                 <Nav.Link
                   href=""
                   onClick={() => navigate("/userQuestionnaire")}
                 >
-                  Questionnaire
-                </Nav.Link>
-                <Nav.Link
-                  href=""
-                  onClick={() => navigate("/usersRecommendations")}
-                >
-                  Users recommendations
+                  My questionnaire
                 </Nav.Link>
                 <Nav.Link href="" onClick={() => navigate("/editUserProfile")}>
-                  Edit profile
+                  My profile
                 </Nav.Link>
               </>
             )}

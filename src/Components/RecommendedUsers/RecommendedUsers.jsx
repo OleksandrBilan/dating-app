@@ -5,7 +5,11 @@ import { API_URL } from "../../config";
 import s from "./style.module.css";
 import { AuthService } from "../../Services/auth";
 
-export function RecommendedUsers({ usersRecommendations }) {
+export function RecommendedUsers({
+  usersRecommendations,
+  emptyRecommendationListMessage,
+  onUserLike,
+}) {
   const [currentRecommendationIndex, setCurrentRecommendationIndex] =
     useState(0);
   const [sex, setSex] = useState();
@@ -63,31 +67,22 @@ export function RecommendedUsers({ usersRecommendations }) {
   }
 
   function showNextRecommendation() {
-    if (currentRecommendationIndex === usersRecommendations.length - 1) {
-      alert(
-        "That's the last recommended user \n(set some other search filters to see more users)"
-      );
-    } else {
-      setCurrentRecommendationIndex(currentRecommendationIndex + 1);
-    }
+    setCurrentRecommendationIndex(currentRecommendationIndex + 1);
   }
 
   function onLike() {
-    const request = {
-      likingUserId: AuthService.getUserInfo().id,
-      likedUserId: usersRecommendations[currentRecommendationIndex].user.id,
-    };
-    axios
-      .post(`${API_URL}/recommendations/addUserLike`, request)
-      .then((response) => showNextRecommendation())
-      .catch((error) => alert("Error saving yout like :("));
+    onUserLike(usersRecommendations[currentRecommendationIndex].user.id);
+    showNextRecommendation();
   }
 
   function onSkip() {
     showNextRecommendation();
   }
 
-  if (usersRecommendations[currentRecommendationIndex]) {
+  if (
+    usersRecommendations &&
+    usersRecommendations[currentRecommendationIndex]
+  ) {
     return (
       <div className={s.container}>
         <div className={s.top}>
@@ -184,10 +179,6 @@ export function RecommendedUsers({ usersRecommendations }) {
       </div>
     );
   } else {
-    return (
-      <h4>
-        Set up the Search Filters and press Apply to see recommended users :)
-      </h4>
-    );
+    return <h4>{emptyRecommendationListMessage}</h4>;
   }
 }

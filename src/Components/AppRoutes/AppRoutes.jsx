@@ -8,6 +8,8 @@ import { ProtectedRoute } from "../common/ProtectedRoute/ProtectedRoute";
 import { UserQuestionnaire } from "../../Pages/UserQuestionnaire/UserQuestionnaire";
 import { UsersRecommendations } from "../../Pages/UsersRecommendations/UsersRecommendations";
 import { EditUserProfile } from "../../Pages/EditUserProfile/EditUserProfile";
+import { UserLikes } from "../../Pages/UserLikes/UserLikes";
+import { UserMutualLikes } from "../../Pages/UserMutualLikes/UserMutualLikes";
 
 export function AppRoutes() {
   return (
@@ -53,6 +55,22 @@ export function AppRoutes() {
           element={
             <ProtectedRoute>
               <EditUserProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/userLikes"
+          element={
+            <ProtectedRoute>
+              <UserLikes />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/userMutualLikes"
+          element={
+            <ProtectedRoute>
+              <UserMutualLikes />
             </ProtectedRoute>
           }
         />
