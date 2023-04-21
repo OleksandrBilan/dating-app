@@ -10,6 +10,12 @@ export function MessageForm({ onMessageSend }) {
     setMessage("");
   }
 
+  function onKeyDown(e) {
+    if (e.key === "Enter" && message) {
+      onSubmit();
+    }
+  }
+
   return (
     <div className={s.container}>
       <div className={s.textArea}>
@@ -18,6 +24,7 @@ export function MessageForm({ onMessageSend }) {
           placeholder="message..."
           className="form-control"
           name="message"
+          onKeyDown={onKeyDown}
           onChange={(e) => setMessage(e.target.value)}
           value={message}
         />

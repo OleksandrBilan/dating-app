@@ -11,6 +11,9 @@ export function Chat({ chatId }) {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
+    if (connection) {
+      closeConnection();
+    }
     const user = AuthService.getUserInfo();
     joinChat(user.id, chatId?.toString()).then((connection) =>
       setConnection(connection)
@@ -27,6 +30,11 @@ export function Chat({ chatId }) {
 
         connection.on("ReceiveMessage", (user, message) => {
           setMessages((messages) => [...messages, { user, message }]);
+        });
+
+        connection.onclose((e) => {
+          setConnection();
+          setMessages([]);
         });
 
         await connection.start();
@@ -52,7 +60,15 @@ export function Chat({ chatId }) {
     }
   }
 
-  if (chatId)
+  async function closeConnection() {
+    try {
+      await connection.stop();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  if (connection)
     return (
       <div className={s.container}>
         <div className={s.messages}>
