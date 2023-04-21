@@ -10,6 +10,7 @@ import { UsersRecommendations } from "../../Pages/UsersRecommendations/UsersReco
 import { EditUserProfile } from "../../Pages/EditUserProfile/EditUserProfile";
 import { UserLikes } from "../../Pages/UserLikes/UserLikes";
 import { UserMutualLikes } from "../../Pages/UserMutualLikes/UserMutualLikes";
+import { UserChats } from "../../Pages/UserChats/UserChats";
 
 export function AppRoutes() {
   return (
@@ -71,6 +72,14 @@ export function AppRoutes() {
           element={
             <ProtectedRoute>
               <UserMutualLikes />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/userChats"
+          element={
+            <ProtectedRoute>
+              <UserChats />
             </ProtectedRoute>
           }
         />

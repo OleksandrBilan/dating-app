@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { CaretRightFill, HeartFill } from "react-bootstrap-icons";
 import { API_URL } from "../../config";
 import s from "./style.module.css";
-import { AuthService } from "../../Services/auth";
 
 export function RecommendedUsers({
   usersRecommendations,

@@ -1,0 +1,19 @@
+.container {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+}
+
+.messageText {
+  background-color: #4dd2ff;
+  border-radius: 5px;
+  max-width: 70%;
+  word-break: break-word;
+}

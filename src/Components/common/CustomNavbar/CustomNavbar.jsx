@@ -61,6 +61,9 @@ export function CustomNavbar() {
                     Mutual likes
                   </NavDropdown.Item>
                 </NavDropdown>
+                <Nav.Link href="" onClick={() => navigate("/userChats")}>
+                  My chats
+                </Nav.Link>
                 <Nav.Link
                   href=""
                   onClick={() => navigate("/userQuestionnaire")}

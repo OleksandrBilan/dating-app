@@ -12,7 +12,7 @@ export class AuthService {
   static getToken() {
     let decodedCookie = decodeURIComponent(document.cookie);
     let tokenNameIndex = decodedCookie.indexOf("token");
-    if (tokenNameIndex == -1) {
+    if (tokenNameIndex === -1) {
       return null;
     }
 
@@ -45,7 +45,7 @@ export class AuthService {
   static getUserInfo() {
     try {
       const serializedInfo = localStorage.getItem("user");
-      if (serializedInfo == null) {
+      if (!serializedInfo) {
         return null;
       }
       return JSON.parse(serializedInfo);

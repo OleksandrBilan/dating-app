@@ -1,0 +1,19 @@
+.container {
+  margin-top: 10vh;
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.chatsList {
+  width: 20%;
+  height: 83vh;
+}
+
+.chat {
+  height: 98%;
+  width: 75%;
+  border: 1px solid black;
+  border-radius: 5px;
+}
