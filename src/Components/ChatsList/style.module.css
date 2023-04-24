@@ -12,12 +12,18 @@
   width: 100%;
 }
 
-.chat {
+.chat,
+.selectedChat {
   height: 10%;
+  min-height: 40px;
   width: 100%;
   border: 1px solid #212529;
   border-radius: 6px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.selectedChat {
+  background-color: #b3b3cc;
 }

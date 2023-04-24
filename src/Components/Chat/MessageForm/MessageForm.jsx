@@ -21,7 +21,7 @@ export function MessageForm({ onMessageSend }) {
       <div className={s.textArea}>
         <input
           tupe="text"
-          placeholder="message..."
+          placeholder="Message..."
           className="form-control"
           name="message"
           onKeyDown={onKeyDown}

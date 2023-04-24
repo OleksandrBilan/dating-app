@@ -5,6 +5,7 @@ import { API_URL } from "../../config";
 import { AuthService } from "../../Services/auth";
 import { MessageForm } from "./MessageForm/MessageForm";
 import { MessagesList } from "./MessagesList/MessagesList";
+import axios from "axios";
 
 export function Chat({ chatId }) {
   const [connection, setConnection] = useState();
@@ -14,10 +15,16 @@ export function Chat({ chatId }) {
     if (connection) {
       closeConnection();
     }
+
     const user = AuthService.getUserInfo();
     joinChat(user.id, chatId?.toString()).then((connection) =>
       setConnection(connection)
     );
+
+    axios
+      .get(`${API_URL}/recommendations/getChatMessages?chatId=${chatId}`)
+      .then((response) => setMessages(response.data))
+      .catch((error) => alert("Can't load the messages :("));
   }, [chatId]);
 
   async function joinChat(userId, chatId) {
@@ -28,8 +35,8 @@ export function Chat({ chatId }) {
           .configureLogging(LogLevel.Information)
           .build();
 
-        connection.on("ReceiveMessage", (user, message) => {
-          setMessages((messages) => [...messages, { user, message }]);
+        connection.on("ReceiveMessage", (newMessage) => {
+          setMessages((messages) => [...messages, newMessage]);
         });
 
         connection.onclose((e) => {
@@ -68,9 +75,12 @@ export function Chat({ chatId }) {
     }
   }
 
-  if (connection)
+  if (chatId && connection)
     return (
       <div className={s.container}>
+        <div className={s.header}>
+          <h4>{}</h4>
+        </div>
         <div className={s.messages}>
           <MessagesList messages={messages} />
         </div>

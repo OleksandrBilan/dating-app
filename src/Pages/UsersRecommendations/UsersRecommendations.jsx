@@ -48,11 +48,17 @@ export function UsersRecommendations() {
         <UsersFilters onApply={onFiltersApply} />
       </div>
       <div className={s.recommendedUsers}>
-        <RecommendedUsers
-          usersRecommendations={recommendedUsers}
-          emptyRecommendationListMessage="Set up the Search Filters and press Apply to see recommended users :)"
-          onUserLike={onUserLike}
-        />
+        {recommendedUsers && recommendedUsers.length > 0 ? (
+          <RecommendedUsers
+            usersRecommendations={recommendedUsers}
+            onUserLike={onUserLike}
+          />
+        ) : (
+          <h4>
+            Set up the Search Filters and press Apply to see recommended users
+            :)
+          </h4>
+        )}
       </div>
     </div>
   );

@@ -30,13 +30,17 @@ export function MessagesList({ messages }) {
             key={index}
             className={s.message}
             style={
-              currentUserId === m.user
+              currentUserId === m.senderId
                 ? { alignItems: "end" }
                 : { alignItems: "start" }
             }
           >
-            <div className={s.messageText}>{m.message}</div>
-            <div className={s.dateTime}>{moment().toLocaleString()}</div>
+            <div className={s.messageText}>{m.text}</div>
+            <div className={s.dateTime}>
+              {(m.senderId === currentUserId ? "You" : m.senderName) +
+                ", " +
+                moment(new Date(m.dateTime)).format("DD.MM.YYYY, HH:MM")}
+            </div>
           </div>
         ))}
       </div>
