@@ -7,12 +7,14 @@ import { API_URL } from "../../config";
 import { UserInfoForm } from "../../Components/UserInfoForm/UserInfoForm";
 import { UserQuestionnaireForm } from "../../Components/Questionnaire/UserQuestionnaireForm/UserQuestionnaireForm";
 import { ImageUploadForm } from "../../Components/ImageUploadForm/ImageUploadForm";
+import { useNavigate } from "react-router-dom";
 
 export function Register() {
-  const [progressStage, setProgressStage] = useState(1);
+  const [progressStage, setProgressStage] = useState(2);
   const [credentials, setCredentials] = useState();
   const [userInfo, setUserInfo] = useState();
   const [questionnaireAnswers, setQuestionnaireAnswers] = useState();
+  const navigate = useNavigate();
 
   function onLoginSubmit(formValues) {
     axios
@@ -94,21 +96,29 @@ export function Register() {
           <ProgressBar
             now={progressStage * 20}
             visuallyHidden
-            style={{ borderRadius: 5 }}
+            style={{ borderRadius: 6 }}
             variant="primary"
           />
         </div>
         <div className={s.title}>
           <span>
-            {progressStage === 1
-              ? "Please, enter your credentials"
-              : progressStage === 2
-              ? "Please, enter info about yourself"
-              : progressStage === 3
-              ? "Please, fill the questionnaire"
-              : progressStage === 4
-              ? "Please, upload your picture"
-              : "That's all :) Please, confirm your email and log in ^_^"}
+            {progressStage === 1 ? (
+              "Please, enter your credentials"
+            ) : progressStage === 2 ? (
+              "Please, enter info about yourself"
+            ) : progressStage === 3 ? (
+              "Please, fill the questionnaire"
+            ) : progressStage === 4 ? (
+              "Please, upload your picture"
+            ) : (
+              <span>
+                That's all :) Please, confirm your email and{" "}
+                <a className={s.link} onClick={() => navigate("/login")}>
+                  log in
+                </a>{" "}
+                ^_^
+              </span>
+            )}
           </span>
         </div>
         <div className={s.registerForm}>

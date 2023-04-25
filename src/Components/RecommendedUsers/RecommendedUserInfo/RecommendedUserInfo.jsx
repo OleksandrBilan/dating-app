@@ -18,6 +18,7 @@ export function RecommendedUserInfo({ recommendedUser }) {
           setCurrentUserImageUrl(url);
         })
         .catch((error) => {
+          console.clear();
           setCurrentUserImageUrl("");
         });
     } else {
@@ -98,7 +99,7 @@ export function RecommendedUserInfo({ recommendedUser }) {
           <img
             className={s.image}
             src={currentUserImageUrl}
-            alt="User Avatar"
+            alt="No user photo"
           />
         </div>
       </div>

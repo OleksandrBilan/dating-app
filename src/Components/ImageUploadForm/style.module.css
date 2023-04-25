@@ -9,8 +9,6 @@
   align-items: center;
   gap: 5px;
   padding: 1rem;
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
   border-radius: 4px;
 }
 
@@ -18,15 +16,15 @@
   position: relative;
   display: inline-block;
   padding: 0.5rem 1rem;
-  background-color: #fff;
-  border: 2px solid #ccc;
+  background-color: #3e3245;
+  border: 1px solid #524a79;
   border-radius: 4px;
   font-size: 1.2rem;
   cursor: pointer;
 }
 
 .imageUploadLabel:hover {
-  background-color: #f9f9f9;
+  background-color: #524a79;
 }
 
 .imageUploadInput {
@@ -34,7 +32,7 @@
 }
 
 .buttons {
-  width: 32%;
+  width: 25%;
   display: flex;
   justify-content: space-evenly;
 }

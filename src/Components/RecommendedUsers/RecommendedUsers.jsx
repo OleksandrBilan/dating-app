@@ -68,7 +68,7 @@ export function RecommendedUsers({
           ) : (
             <CaretRightFill
               fill="gray"
-              size={35}
+              size={40}
               className={s.icon}
               onClick={onSkip}
             />

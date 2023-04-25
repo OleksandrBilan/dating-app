@@ -4,6 +4,7 @@
   justify-content: center;
   height: 100vh;
   width: 100vw;
+  background-color: #90b8f8;
 }
 
 .card {
@@ -11,9 +12,10 @@
   height: 90%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  border-radius: 5px;
-  border: 1px solid #212529;
+  border-radius: 6px;
+  background-color: #353941;
+  color: #e2eff1;
+  box-shadow: 10px 10px 5px #5f85db;
 }
 
 .title {

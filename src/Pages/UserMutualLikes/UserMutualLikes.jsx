@@ -59,7 +59,7 @@ export function UserMutualLikes() {
           onUserLike={onUserLike}
           onUserSkip={onUserSkip}
           SkipIcon={() => <XCircle fill="gray" size={35} />}
-          LikeIcon={() => <ChatDots fill="blue" size={35} />}
+          LikeIcon={() => <ChatDots fill="#74bbca" size={35} />}
         />
       </div>
     </div>

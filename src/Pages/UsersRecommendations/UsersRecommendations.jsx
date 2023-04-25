@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CustomNavbar } from "../../Components/common/CustomNavbar/CustomNavbar";
 import { RecommendedUsers } from "../../Components/RecommendedUsers/RecommendedUsers";
 import { UsersFilters } from "../../Components/UsersFilters/UsersFilters";
@@ -9,6 +9,11 @@ import { AuthService } from "../../Services/auth";
 
 export function UsersRecommendations() {
   const [recommendedUsers, setRecommendedUsers] = useState([]);
+  const [userId, setUserId] = useState();
+
+  useEffect(() => {
+    setUserId(AuthService.getUserInfo().id);
+  }, []);
 
   function prepareParameters(formValues) {
     const keys = Object.keys(formValues);
@@ -19,7 +24,7 @@ export function UsersRecommendations() {
         parametersStr += k + "=" + formValues[k].toString();
       }
     });
-    parametersStr += "&userId=" + AuthService.getUserInfo().id;
+    parametersStr += "&userId=" + userId;
     return parametersStr;
   }
 
@@ -31,10 +36,10 @@ export function UsersRecommendations() {
       .catch((error) => alert("Can't load recommended users :("));
   }
 
-  function onUserLike(likedUserId) {
+  function onUserLike(recommendation) {
     const request = {
-      likingUserId: AuthService.getUserInfo().id,
-      likedUserId: likedUserId,
+      likingUserId: userId,
+      likedUserId: recommendation.user.id,
     };
     axios
       .post(`${API_URL}/recommendations/addUserLike`, request)

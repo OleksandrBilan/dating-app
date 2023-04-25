@@ -11,8 +11,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  border-radius: 5px;
-  border: 1px solid #212529;
+  border-radius: 6px;
+  background-color: #353941;
+  color: #e2eff1;
+  box-shadow: 10px 10px 5px #5f85db;
+  overflow-y: overlay;
 }
 
 .progress_bar {
@@ -30,4 +33,10 @@
   height: 100%;
   width: 100%;
   overflow-y: auto;
+}
+
+.link {
+  text-decoration: underline;
+  font-style: italic;
+  cursor: pointer;
 }

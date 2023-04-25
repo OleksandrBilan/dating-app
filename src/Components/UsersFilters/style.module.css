@@ -4,8 +4,10 @@
   align-items: center;
   gap: 10px;
   border-radius: 6px;
-  border: 1px solid #212529;
   padding: 3%;
+  box-shadow: 7px 7px 5px #5f85db;
+  background-color: rgba(var(--bs-dark-rgb));
+  color: #e2eff1;
 }
 
 .inputContainer {
