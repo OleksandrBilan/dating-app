@@ -4,7 +4,6 @@ import s from "./style.module.css";
 import { API_URL } from "../../../config";
 import Question from "../Question/Question";
 import { PlusCircle, X } from "react-bootstrap-icons";
-import ToolTip from "../../common/ToolTip";
 import useToggle from "../../../hooks/useToggle";
 import Modal from "../../common/Modal";
 import { QuestionForm } from "../QuestionForm/QuestionForm";
@@ -120,22 +119,17 @@ export function AdminQuestionnaireForm() {
         />
       ))}
       <div className={s.addQuestionButton}>
-        <ToolTip
-          tooltiptext="Add question"
-          element={
-            <PlusCircle
-              fill="#74bbca"
-              size={27}
-              className={s.addQuestionIcon}
-              onClick={() => addToggle.on()}
-            />
-          }
+        <PlusCircle
+          fill="#74bbca"
+          size={27}
+          className={s.addQuestionIcon}
+          onClick={() => addToggle.on()}
         />
       </div>
       <Modal show={addToggle}>
         <div className={s.editModal}>
           <X
-            fill="black"
+            fill="#74bbca"
             size={30}
             onClick={() => addToggle.off()}
             className={s.exitIcon}

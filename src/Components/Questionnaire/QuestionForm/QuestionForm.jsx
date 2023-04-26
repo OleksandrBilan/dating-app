@@ -1,5 +1,4 @@
-import { PlusCircle, Trash } from "react-bootstrap-icons";
-import ToolTip from "../../common/ToolTip";
+import { PlusCircle, TrashFill } from "react-bootstrap-icons";
 import s from "./style.module.css";
 import { FieldError } from "../../common/FieldError/FieldError";
 import { useState } from "react";
@@ -81,30 +80,21 @@ export function QuestionForm({ onSubmit, toggle }) {
                 defaultValue={a}
               />
             </div>
-            <ToolTip
-              tooltiptext="Delete answer"
-              element={
-                <Trash
-                  fill="black"
-                  className={s.deleteIcon}
-                  onClick={() => onAnswerDelete(i)}
-                />
-              }
+
+            <TrashFill
+              fill="#74bbca"
+              className={s.deleteIcon}
+              onClick={() => onAnswerDelete(i)}
             />
           </div>
         ))}
       </div>
       <div className={s.addAnswerButton}>
-        <ToolTip
-          tooltiptext="Add answer"
-          element={
-            <PlusCircle
-              fill="#74bbca"
-              size={27}
-              className={s.addAnswerIcon}
-              onClick={onAddAnswer}
-            />
-          }
+        <PlusCircle
+          fill="#74bbca"
+          size={27}
+          className={s.addAnswerIcon}
+          onClick={onAddAnswer}
         />
       </div>
       <div className={s.saveButton}>

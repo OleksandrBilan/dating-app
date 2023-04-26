@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(8px);
-  background-color: rgb(9 9 9 / 80%);
+  background-color: #09090966;
   overflow-y: hidden;
 }
 
@@ -19,7 +19,6 @@
 
 .modalContent {
   display: flex;
-  background-color: #353941;
 }
 
 .exitButtonWrapper {

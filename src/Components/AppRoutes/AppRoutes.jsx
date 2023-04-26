@@ -4,13 +4,13 @@ import { ConfirmedEmail } from "../../Pages/ConfirmedEmail/ConfirmedEmail";
 import { Login } from "../../Pages/Login/Login";
 import { Home } from "../../Pages/Home/Home";
 import { AdminQuestionnaire } from "../../Pages/AdminQuestionnaire/AdminQuestionnaire";
-import { ProtectedRoute } from "../common/ProtectedRoute/ProtectedRoute";
 import { UserQuestionnaire } from "../../Pages/UserQuestionnaire/UserQuestionnaire";
 import { UsersRecommendations } from "../../Pages/UsersRecommendations/UsersRecommendations";
 import { EditUserProfile } from "../../Pages/EditUserProfile/EditUserProfile";
 import { UserLikes } from "../../Pages/UserLikes/UserLikes";
 import { UserMutualLikes } from "../../Pages/UserMutualLikes/UserMutualLikes";
 import { UserChats } from "../../Pages/UserChats/UserChats";
+import { ProtectedRoute } from "./ProtectedRoute";
 
 export function AppRoutes() {
   return (

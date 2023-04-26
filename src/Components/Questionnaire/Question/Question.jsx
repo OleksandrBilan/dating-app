@@ -1,14 +1,12 @@
 import {
   CheckCircle,
-  Pencil,
+  CheckCircleFill,
   PencilFill,
   PlusCircle,
-  Trash,
   TrashFill,
   X,
 } from "react-bootstrap-icons";
 import Modal from "../../common/Modal";
-import ToolTip from "../../common/ToolTip";
 import useToggle from "../../../hooks/useToggle";
 import s from "./styles.module.css";
 import { useState } from "react";
@@ -83,31 +81,21 @@ const Question = ({
     <div className={s.questionContainer} key={`q${questionData.id}`}>
       <h4>{questionData?.name}</h4>
       <div className={s.buttonsGroup}>
-        <ToolTip
-          tooltiptext="Edit question"
-          element={
-            <PencilFill
-              fill="#74bbca"
-              onClick={() => editToggle.on()}
-              className={s.saveIcon}
-            />
-          }
+        <PencilFill
+          fill="#74bbca"
+          onClick={() => editToggle.on()}
+          className={s.saveIcon}
         />
-        <ToolTip
-          tooltiptext="Delete question"
-          element={
-            <TrashFill
-              fill="#74bbca"
-              className={s.deleteIcon}
-              onClick={onQuestionDeleteClick}
-            />
-          }
+        <TrashFill
+          fill="#74bbca"
+          className={s.deleteIcon}
+          onClick={onQuestionDeleteClick}
         />
       </div>
       <Modal show={editToggle}>
         <div className={s.editModal}>
           <X
-            fill="black"
+            fill="#74bbca"
             size={30}
             onClick={() => editToggle.off()}
             className={s.exitIcon}
@@ -126,16 +114,13 @@ const Question = ({
               />
               <FieldError message={formErrors.question} />
             </div>
-            <ToolTip
-              tooltiptext="Save question text"
-              element={
-                <CheckCircle
-                  fill="black"
-                  className={s.saveIcon}
-                  onClick={onQuestionSaveClick}
-                />
-              }
-            />
+            <div className={s.buttonsGroup}>
+              <CheckCircleFill
+                fill="#74bbca"
+                className={s.saveIcon}
+                onClick={onQuestionSaveClick}
+              />
+            </div>
           </div>
           <div className={s.answersContainer}>
             {answers.map((item) => (
@@ -150,41 +135,26 @@ const Question = ({
                   />
                 </div>
                 <div className={s.buttonsGroup}>
-                  <ToolTip
-                    tooltiptext="Save answer"
-                    element={
-                      <CheckCircle
-                        fill="black"
-                        className={s.saveIcon}
-                        onClick={() => onAnswerSaveClick(item.id)}
-                      />
-                    }
+                  <CheckCircleFill
+                    fill="#74bbca"
+                    className={s.saveIcon}
+                    onClick={() => onAnswerSaveClick(item.id)}
                   />
-                  <ToolTip
-                    tooltiptext="Delete answer"
-                    element={
-                      <Trash
-                        fill="black"
-                        className={s.deleteIcon}
-                        onClick={() => onAnswerDeleteClick(item.id)}
-                      />
-                    }
+                  <TrashFill
+                    fill="#74bbca"
+                    className={s.deleteIcon}
+                    onClick={() => onAnswerDeleteClick(item.id)}
                   />
                 </div>
               </div>
             ))}
           </div>
           <div className={s.addAnswerButton}>
-            <ToolTip
-              tooltiptext="Add answer"
-              element={
-                <PlusCircle
-                  fill="black"
-                  size={27}
-                  className={s.addAnswerIcon}
-                  onClick={onAddAnswer}
-                />
-              }
+            <PlusCircle
+              fill="#74bbca"
+              size={27}
+              className={s.addAnswerIcon}
+              onClick={onAddAnswer}
             />
           </div>
         </div>

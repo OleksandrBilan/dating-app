@@ -46,7 +46,7 @@
   width: 30vw;
   border-radius: 15px;
   padding: 15px;
-  background-color: #fff;
+  background-color: rgba(var(--bs-dark-rgb));
   display: flex;
   flex-direction: column;
   gap: 5px;
