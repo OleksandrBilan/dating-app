@@ -1,21 +1,42 @@
 .container {
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 100%;
 }
 
 .question {
-  width: 90%;
+  width: 100%;
+  padding-left: 2%;
+}
+
+.buttonsContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .buttons {
   display: flex;
-  width: 25%;
+  width: 30%;
   justify-content: space-evenly;
 }
 
 .answers {
   display: flex;
   flex-direction: column;
+}
+
+.questions {
+  height: 84%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: overlay;
+}
+
+.title {
+  height: 8%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,4 +1,5 @@
 .navbar {
   width: 100vw;
   height: 8vh;
+  box-shadow: 0 7px 5px #5f85db;
 }

@@ -124,7 +124,7 @@ export function AdminQuestionnaireForm() {
           tooltiptext="Add question"
           element={
             <PlusCircle
-              fill="black"
+              fill="#74bbca"
               size={27}
               className={s.addQuestionIcon}
               onClick={() => addToggle.on()}

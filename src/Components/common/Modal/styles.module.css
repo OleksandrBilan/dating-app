@@ -19,6 +19,7 @@
 
 .modalContent {
   display: flex;
+  background-color: #353941;
 }
 
 .exitButtonWrapper {

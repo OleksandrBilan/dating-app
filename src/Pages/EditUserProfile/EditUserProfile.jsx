@@ -94,16 +94,28 @@ export function EditUserProfile() {
     <div className={s.container}>
       <CustomNavbar />
       <div className={s.card}>
-        <div className={s.changeImageDiv}>
+        <div className={s.title}>
+          <h4>Profile image</h4>
+        </div>
+        <div className={s.middleInfo}>
           <ImageUploadForm
             onSubmit={onImageUpload}
             previewImageUrl={userImageUrl}
           />
+        </div>
+        <div className={s.deleteButtonDiv}>
           <Button variant="danger" onClick={onUserImageDelete}>
             Delete profile image
           </Button>
         </div>
-        <UserInfoForm onSubmit={onFormSubmit} userInfo={userInfo} />
+      </div>
+      <div className={s.card}>
+        <div className={s.title}>
+          <h4>Profile info</h4>
+        </div>
+        <div className={s.middleInfo}>
+          <UserInfoForm onSubmit={onFormSubmit} userInfo={userInfo} />
+        </div>
         <div className={s.deleteButtonDiv}>
           <Button variant="danger" onClick={onAccountDelete}>
             Delete account

@@ -1,8 +1,10 @@
 import {
   CheckCircle,
   Pencil,
+  PencilFill,
   PlusCircle,
   Trash,
+  TrashFill,
   X,
 } from "react-bootstrap-icons";
 import Modal from "../../common/Modal";
@@ -79,13 +81,13 @@ const Question = ({
 
   return (
     <div className={s.questionContainer} key={`q${questionData.id}`}>
-      <h3>{questionData?.name}</h3>
+      <h4>{questionData?.name}</h4>
       <div className={s.buttonsGroup}>
         <ToolTip
           tooltiptext="Edit question"
           element={
-            <Pencil
-              fill="black"
+            <PencilFill
+              fill="#74bbca"
               onClick={() => editToggle.on()}
               className={s.saveIcon}
             />
@@ -94,8 +96,8 @@ const Question = ({
         <ToolTip
           tooltiptext="Delete question"
           element={
-            <Trash
-              fill="black"
+            <TrashFill
+              fill="#74bbca"
               className={s.deleteIcon}
               onClick={onQuestionDeleteClick}
             />

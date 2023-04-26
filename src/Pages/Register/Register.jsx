@@ -10,7 +10,7 @@ import { ImageUploadForm } from "../../Components/ImageUploadForm/ImageUploadFor
 import { useNavigate } from "react-router-dom";
 
 export function Register() {
-  const [progressStage, setProgressStage] = useState(1);
+  const [progressStage, setProgressStage] = useState(3);
   const [credentials, setCredentials] = useState();
   const [userInfo, setUserInfo] = useState();
   const [questionnaireAnswers, setQuestionnaireAnswers] = useState();

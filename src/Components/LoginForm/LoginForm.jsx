@@ -2,7 +2,7 @@ import s from "./style.module.css";
 import { FieldError } from "../common/FieldError/FieldError";
 import { useState } from "react";
 import { ValidatorService } from "../../Services/validator";
-import { ButtonPrimary } from "../common/ButtonPrimary/ButtonPrimary";
+import { Button } from "react-bootstrap";
 
 const VALIDATOR = {
   email: (value) => {
@@ -66,12 +66,13 @@ export function LoginForm({ onSubmit }) {
         <FieldError message={formErrors.password} />
       </div>
       <div className={s.submit_btn}>
-        <ButtonPrimary
+        <Button
+          variant="primary"
           isDisabled={hasError()}
           onClick={() => onSubmit(formValues)}
         >
           Submit
-        </ButtonPrimary>
+        </Button>
       </div>
     </div>
   );

@@ -1,10 +1,10 @@
 import { PlusCircle, Trash } from "react-bootstrap-icons";
-import { ButtonPrimary } from "../../common/ButtonPrimary/ButtonPrimary";
 import ToolTip from "../../common/ToolTip";
 import s from "./style.module.css";
 import { FieldError } from "../../common/FieldError/FieldError";
 import { useState } from "react";
 import { ValidatorService } from "../../../Services/validator";
+import { Button } from "react-bootstrap";
 
 export function QuestionForm({ onSubmit, toggle }) {
   const [formValues, setFormValues] = useState({ question: "" });
@@ -99,7 +99,7 @@ export function QuestionForm({ onSubmit, toggle }) {
           tooltiptext="Add answer"
           element={
             <PlusCircle
-              fill="black"
+              fill="#74bbca"
               size={27}
               className={s.addAnswerIcon}
               onClick={onAddAnswer}
@@ -108,9 +108,9 @@ export function QuestionForm({ onSubmit, toggle }) {
         />
       </div>
       <div className={s.saveButton}>
-        <ButtonPrimary isDisabled={hasError()} onClick={onSave}>
+        <Button variant="primary" isDisabled={hasError()} onClick={onSave}>
           Save
-        </ButtonPrimary>
+        </Button>
       </div>
     </div>
   );

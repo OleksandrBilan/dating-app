@@ -6,8 +6,8 @@ import { Country, City } from "country-state-city";
 import { Typeahead } from "react-bootstrap-typeahead";
 import axios from "axios";
 import { API_URL } from "../../config";
-import { ButtonPrimary } from "../common/ButtonPrimary/ButtonPrimary";
 import { FieldError } from "../common/FieldError/FieldError";
+import { Button } from "react-bootstrap";
 
 const VALIDATOR = {
   name: (value) => {
@@ -241,12 +241,9 @@ export function UserInfoForm({ onSubmit, userInfo }) {
         </>
       )}
       <div className={s.submit_btn}>
-        <ButtonPrimary
-          isDisabled={hasError()}
-          onClick={() => onSubmit(formValues)}
-        >
+        <Button isDisabled={hasError()} onClick={() => onSubmit(formValues)}>
           Submit
-        </ButtonPrimary>
+        </Button>
       </div>
     </div>
   );

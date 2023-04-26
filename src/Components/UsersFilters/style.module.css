@@ -7,7 +7,6 @@
   padding: 3%;
   box-shadow: 7px 7px 5px #5f85db;
   background-color: rgba(var(--bs-dark-rgb));
-  color: #e2eff1;
 }
 
 .inputContainer {

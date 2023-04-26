@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { API_URL } from "../../../config";
 import { Button } from "react-bootstrap";
 import s from "./style.module.css";
-import { ButtonPrimary } from "../../common/ButtonPrimary/ButtonPrimary";
 
 export function UserQuestionnaireForm({ onSubmit, savedAnswers }) {
   const [questionnaire, setQuestionnaire] = useState([]);
@@ -59,35 +58,39 @@ export function UserQuestionnaireForm({ onSubmit, savedAnswers }) {
       <div className={s.title}>
         <h4>Your questionnaire is {completedPercents.toFixed(0)}% complete</h4>
       </div>
-      {questionnaire.map((question) => (
-        <div className={s.question} key={question.id}>
-          <h4>{question.name}</h4>
-          <div className={s.answers}>
-            {question.answers.map((answer) => (
-              <label key={answer.id}>
-                <input
-                  type="radio"
-                  onChange={() => onAnswerClick(question.id, answer.id)}
-                  checked={isAnswerChecked(answer.id)}
-                />
-                {answer.value}
-              </label>
-            ))}
+      <div className={s.questions}>
+        {questionnaire.map((question) => (
+          <div className={s.question} key={question.id}>
+            <h4>{question.name}</h4>
+            <div className={s.answers}>
+              {question.answers.map((answer) => (
+                <label key={answer.id}>
+                  <input
+                    type="radio"
+                    onChange={() => onAnswerClick(question.id, answer.id)}
+                    checked={isAnswerChecked(answer.id)}
+                  />
+                  {answer.value}
+                </label>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
-      <div className={s.buttons}>
-        <ButtonPrimary onClick={() => onSubmit(clickedAnswers)}>
-          Submit
-        </ButtonPrimary>
-        <Button variant="secondary" onClick={() => setClickedAnswers([])}>
-          Clear
-        </Button>
-        {savedAnswers == null && (
-          <Button variant="secondary" onClick={() => onSubmit(null)}>
-            Skip
+        ))}
+      </div>
+      <div className={s.buttonsContainer}>
+        <div className={s.buttons}>
+          <Button variant="primary" onClick={() => onSubmit(clickedAnswers)}>
+            Submit
           </Button>
-        )}
+          <Button variant="secondary" onClick={() => setClickedAnswers([])}>
+            Clear
+          </Button>
+          {savedAnswers == null && (
+            <Button variant="secondary" onClick={() => onSubmit(null)}>
+              Skip
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );
