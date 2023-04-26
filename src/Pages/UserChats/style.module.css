@@ -8,12 +8,18 @@
 
 .chatsList {
   width: 20%;
-  height: 83vh;
+  max-height: 87vh;
+  height: fit-content;
+  background-color: rgba(var(--bs-dark-rgb));
+  box-shadow: 7px 7px 5px #5f85db;
+  border-radius: 6px;
+  padding: 1%;
 }
 
 .chat {
   height: 98%;
   width: 75%;
-  border: 1px solid black;
-  border-radius: 5px;
+  background-color: rgba(var(--bs-dark-rgb));
+  box-shadow: 7px 7px 5px #5f85db;
+  border-radius: 6px;
 }

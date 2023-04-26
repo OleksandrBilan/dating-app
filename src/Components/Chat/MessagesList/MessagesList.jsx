@@ -8,6 +8,7 @@ export function MessagesList({ messages }) {
   const messagesRef = useRef();
 
   useEffect(() => {
+    console.log(messages);
     setCurrentUserId(AuthService.getUserInfo().id);
   }, []);
 
@@ -39,7 +40,7 @@ export function MessagesList({ messages }) {
             <div className={s.dateTime}>
               {(m.senderId === currentUserId ? "You" : m.senderName) +
                 ", " +
-                moment(new Date(m.dateTime)).format("DD.MM.YYYY, HH:MM")}
+                moment(new Date(m.dateTime)).format("DD.MM.YYYY, HH:mm")}
             </div>
           </div>
         ))}

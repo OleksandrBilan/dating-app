@@ -4,6 +4,8 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  padding: 1%;
 }
 
 .message {
@@ -12,8 +14,13 @@
 }
 
 .messageText {
-  background-color: #4dd2ff;
-  border-radius: 5px;
+  background-color: #65799b;
+  border-radius: 6px;
   max-width: 70%;
   word-break: break-word;
+  padding: 0.5%;
+}
+
+.dateTime {
+  color: #b6d5e1;
 }

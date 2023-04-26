@@ -68,7 +68,7 @@ export function LoginForm({ onSubmit }) {
       <div className={s.submit_btn}>
         <Button
           variant="primary"
-          isDisabled={hasError()}
+          disabled={hasError()}
           onClick={() => onSubmit(formValues)}
         >
           Submit

@@ -98,7 +98,7 @@ export function QuestionForm({ onSubmit, toggle }) {
         />
       </div>
       <div className={s.saveButton}>
-        <Button variant="primary" isDisabled={hasError()} onClick={onSave}>
+        <Button variant="primary" disabled={hasError()} onClick={onSave}>
           Save
         </Button>
       </div>

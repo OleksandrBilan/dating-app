@@ -6,25 +6,35 @@ import { AuthService } from "../../Services/auth";
 import { MessageForm } from "./MessageForm/MessageForm";
 import { MessagesList } from "./MessagesList/MessagesList";
 import axios from "axios";
+import moment from "moment";
 
 export function Chat({ chatId }) {
   const [connection, setConnection] = useState();
   const [messages, setMessages] = useState([]);
+  const [chatInfo, setChatInfo] = useState();
+  const [currentUserId, setCurrentUserId] = useState();
 
   useEffect(() => {
+    setCurrentUserId(AuthService.getUserInfo().id);
+
     if (connection) {
       closeConnection();
     }
 
-    const user = AuthService.getUserInfo();
-    joinChat(user.id, chatId?.toString()).then((connection) =>
-      setConnection(connection)
-    );
+    if (chatId) {
+      const user = AuthService.getUserInfo();
+      joinChat(user.id, chatId?.toString()).then((connection) =>
+        setConnection(connection)
+      );
 
-    axios
-      .get(`${API_URL}/recommendations/getChatMessages?chatId=${chatId}`)
-      .then((response) => setMessages(response.data))
-      .catch((error) => alert("Can't load the messages :("));
+      axios
+        .get(`${API_URL}/recommendations/getChat?chatId=${chatId}`)
+        .then((response) => {
+          setChatInfo(response.data);
+          setMessages(response.data.messages);
+        })
+        .catch((error) => alert("Can't load the chat :("));
+    }
   }, [chatId]);
 
   async function joinChat(userId, chatId) {
@@ -75,11 +85,18 @@ export function Chat({ chatId }) {
     }
   }
 
-  if (chatId && connection)
+  if (chatId && connection && chatInfo)
     return (
       <div className={s.container}>
         <div className={s.header}>
-          <h4>{}</h4>
+          <span>
+            Chat with{" "}
+            {chatInfo.user1.id === currentUserId
+              ? chatInfo.user2.name
+              : chatInfo.user1.name}
+            , created{" "}
+            {moment(new Date(chatInfo.createdDateTime)).format("MMMM Do YYYY")}
+          </span>
         </div>
         <div className={s.messages}>
           <MessagesList messages={messages} />
@@ -89,5 +106,5 @@ export function Chat({ chatId }) {
         </div>
       </div>
     );
-  else return <div className={s.container}>Select a chat :)</div>;
+  else return <div className={s.container}></div>;
 }

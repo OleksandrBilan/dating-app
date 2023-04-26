@@ -241,7 +241,7 @@ export function UserInfoForm({ onSubmit, userInfo }) {
         </>
       )}
       <div className={s.submit_btn}>
-        <Button isDisabled={hasError()} onClick={() => onSubmit(formValues)}>
+        <Button disabled={hasError()} onClick={() => onSubmit(formValues)}>
           Submit
         </Button>
       </div>
