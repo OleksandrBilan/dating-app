@@ -8,12 +8,14 @@ import { MessagesList } from "./MessagesList/MessagesList";
 import axios from "axios";
 import moment from "moment";
 import { TrashFill } from "react-bootstrap-icons";
+import { useNavigate } from "react-router-dom";
 
 export function Chat({ chatId, onChatDelete }) {
   const [connection, setConnection] = useState();
   const [messages, setMessages] = useState([]);
   const [chatInfo, setChatInfo] = useState();
   const [currentUserId, setCurrentUserId] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setCurrentUserId(AuthService.getUserInfo().id);
@@ -93,9 +95,23 @@ export function Chat({ chatId, onChatDelete }) {
           <div className={s.chatName}>
             <span>
               Chat with{" "}
-              {chatInfo.user1.id === currentUserId
-                ? chatInfo.user2.name
-                : chatInfo.user1.name}
+              <a
+                className={s.link}
+                onClick={() =>
+                  navigate("/userInfo", {
+                    state: {
+                      userId:
+                        chatInfo.user1.id === currentUserId
+                          ? chatInfo.user2.id
+                          : chatInfo.user1.id,
+                    },
+                  })
+                }
+              >
+                {chatInfo.user1.id === currentUserId
+                  ? chatInfo.user2.name
+                  : chatInfo.user1.name}
+              </a>
               , created{" "}
               {moment(new Date(chatInfo.createdDateTime)).format(
                 "MMMM Do YYYY"

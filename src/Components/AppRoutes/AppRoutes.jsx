@@ -11,6 +11,7 @@ import { UserLikes } from "../../Pages/UserLikes/UserLikes";
 import { UserMutualLikes } from "../../Pages/UserMutualLikes/UserMutualLikes";
 import { UserChats } from "../../Pages/UserChats/UserChats";
 import { ProtectedRoute } from "./ProtectedRoute";
+import { UserInfo } from "../../Pages/UserInfo/UserInfo";
 
 export function AppRoutes() {
   return (
@@ -80,6 +81,14 @@ export function AppRoutes() {
           element={
             <ProtectedRoute>
               <UserChats />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/userInfo"
+          element={
+            <ProtectedRoute>
+              <UserInfo />
             </ProtectedRoute>
           }
         />

@@ -45,3 +45,8 @@
   justify-content: end;
   width: 2%;
 }
+
+.link {
+  color: #74bbca;
+  cursor: pointer;
+}

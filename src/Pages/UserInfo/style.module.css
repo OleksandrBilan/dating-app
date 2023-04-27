@@ -1,0 +1,56 @@
+.container {
+  margin-top: 9vh;
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.top {
+  width: 60%;
+  height: fit-content;
+  display: flex;
+  justify-content: space-evenly;
+  border-radius: 6px;
+  padding: 1%;
+  max-height: 100%;
+  box-shadow: 7px 7px 5px #5f85db;
+  background-color: rgba(var(--bs-dark-rgb));
+}
+
+.topInfo {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  gap: 5px;
+}
+
+.photo {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tag {
+  color: #b6d5e1;
+  font-size: 20px;
+}
+
+.infoLine {
+  color: #e2eff1;
+  font-size: 20px;
+}
+
+.descriptionDiv {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.image {
+  max-width: 100%;
+  max-height: 100%;
+}
