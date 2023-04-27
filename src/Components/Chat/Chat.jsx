@@ -7,8 +7,9 @@ import { MessageForm } from "./MessageForm/MessageForm";
 import { MessagesList } from "./MessagesList/MessagesList";
 import axios from "axios";
 import moment from "moment";
+import { TrashFill } from "react-bootstrap-icons";
 
-export function Chat({ chatId }) {
+export function Chat({ chatId, onChatDelete }) {
   const [connection, setConnection] = useState();
   const [messages, setMessages] = useState([]);
   const [chatInfo, setChatInfo] = useState();
@@ -89,14 +90,21 @@ export function Chat({ chatId }) {
     return (
       <div className={s.container}>
         <div className={s.header}>
-          <span>
-            Chat with{" "}
-            {chatInfo.user1.id === currentUserId
-              ? chatInfo.user2.name
-              : chatInfo.user1.name}
-            , created{" "}
-            {moment(new Date(chatInfo.createdDateTime)).format("MMMM Do YYYY")}
-          </span>
+          <div className={s.chatName}>
+            <span>
+              Chat with{" "}
+              {chatInfo.user1.id === currentUserId
+                ? chatInfo.user2.name
+                : chatInfo.user1.name}
+              , created{" "}
+              {moment(new Date(chatInfo.createdDateTime)).format(
+                "MMMM Do YYYY"
+              )}
+            </span>
+          </div>
+          <div className={s.deleteIcon} onClick={onChatDelete}>
+            <TrashFill fill="red" size={20} />
+          </div>
         </div>
         <div className={s.messages}>
           <MessagesList messages={messages} />

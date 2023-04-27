@@ -1,20 +1,13 @@
 import { useEffect, useState } from "react";
 import s from "./style.module.css";
 import { AuthService } from "../../Services/auth";
-import axios from "axios";
-import { API_URL } from "../../config";
 
-export function ChatsList({ onChatClick, currentChatId }) {
-  const [chats, setChats] = useState([]);
+export function ChatsList({ chats, onChatClick, currentChatId }) {
   const [currentUserId, setCurrentUserId] = useState();
 
   useEffect(() => {
     const userId = AuthService.getUserInfo().id;
     setCurrentUserId(userId);
-    axios
-      .get(`${API_URL}/recommendations/getUserChats?userId=${userId}`)
-      .then((response) => setChats(response.data))
-      .catch((error) => alert("Error loading your chats :("));
   }, []);
 
   if (chats && chats.length > 0)

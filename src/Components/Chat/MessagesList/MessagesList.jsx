@@ -8,7 +8,6 @@ export function MessagesList({ messages }) {
   const messagesRef = useRef();
 
   useEffect(() => {
-    console.log(messages);
     setCurrentUserId(AuthService.getUserInfo().id);
   }, []);
 
