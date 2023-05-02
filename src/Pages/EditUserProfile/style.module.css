@@ -27,8 +27,10 @@
   justify-content: center;
 }
 
-.deleteButtonDiv {
+.buttonsDiv {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 }

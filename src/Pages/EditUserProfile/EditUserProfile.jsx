@@ -90,6 +90,14 @@ export function EditUserProfile() {
     }
   }
 
+  function onViewProfile() {
+    navigate("/userInfo", {
+      state: {
+        userId: userInfo.id,
+      },
+    });
+  }
+
   return (
     <div className={s.container}>
       <CustomNavbar />
@@ -103,7 +111,7 @@ export function EditUserProfile() {
             previewImageUrl={userImageUrl}
           />
         </div>
-        <div className={s.deleteButtonDiv}>
+        <div className={s.buttonsDiv}>
           <Button variant="danger" onClick={onUserImageDelete}>
             Delete profile image
           </Button>
@@ -116,7 +124,10 @@ export function EditUserProfile() {
         <div className={s.middleInfo}>
           <UserInfoForm onSubmit={onFormSubmit} userInfo={userInfo} />
         </div>
-        <div className={s.deleteButtonDiv}>
+        <div className={s.buttonsDiv}>
+          <Button variant="secondary" onClick={onViewProfile}>
+            View my profile
+          </Button>
           <Button variant="danger" onClick={onAccountDelete}>
             Delete account
           </Button>
