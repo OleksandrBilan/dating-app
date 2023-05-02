@@ -29,6 +29,10 @@ export function UserChats() {
   }, []);
 
   function onChatClick(chatId) {
+    let newChats = [...chats];
+    let currentChat = newChats.filter((c) => c.id === chatId)[0];
+    currentChat.unreadMessagesCount = 0;
+    setChats(newChats);
     setCurrentChatId(chatId);
   }
 
@@ -37,7 +41,7 @@ export function UserChats() {
       axios
         .delete(`${API_URL}/recommendations/deleteChat?chatId=${currentChatId}`)
         .then((response) => {
-          const newChats = chats.filter((c) => c.id != currentChatId);
+          const newChats = chats.filter((c) => c.id !== currentChatId);
           setChats(newChats);
           setCurrentChatId();
         })

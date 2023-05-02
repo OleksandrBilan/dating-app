@@ -17,6 +17,13 @@ export function Chat({ chatId, onChatDelete }) {
   const [currentUserId, setCurrentUserId] = useState();
   const navigate = useNavigate();
 
+  function setMessagesAsRead() {
+    return axios.post(`${API_URL}/recommendations/setChatMessagesRead`, {
+      chatId: chatId,
+      userId: currentUserId,
+    });
+  }
+
   useEffect(() => {
     setCurrentUserId(AuthService.getUserInfo().id);
 
@@ -30,13 +37,15 @@ export function Chat({ chatId, onChatDelete }) {
         setConnection(connection)
       );
 
-      axios
-        .get(`${API_URL}/recommendations/getChat?chatId=${chatId}`)
-        .then((response) => {
-          setChatInfo(response.data);
-          setMessages(response.data.messages);
-        })
-        .catch((error) => alert("Can't load the chat :("));
+      setMessagesAsRead().then(() =>
+        axios
+          .get(`${API_URL}/recommendations/getChat?chatId=${chatId}`)
+          .then((response) => {
+            setChatInfo(response.data);
+            setMessages(response.data.messages);
+          })
+          .catch((error) => alert("Can't load the chat :("))
+      );
     }
   }, [chatId]);
 

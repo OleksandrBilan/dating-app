@@ -24,8 +24,20 @@
   align-items: center;
   margin-top: 5px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
 }
 
 .selectedChat {
   background-color: #524a79;
+}
+
+.chatName {
+  width: 85%;
+  display: flex;
+  justify-content: center;
+}
+
+.badge {
+  width: 10%;
 }

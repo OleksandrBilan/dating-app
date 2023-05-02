@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import s from "./style.module.css";
 import { AuthService } from "../../Services/auth";
+import { Badge } from "react-bootstrap";
 
 export function ChatsList({ chats, onChatClick, currentChatId }) {
   const [currentUserId, setCurrentUserId] = useState();
@@ -15,13 +16,20 @@ export function ChatsList({ chats, onChatClick, currentChatId }) {
       <div className={s.container}>
         <ul className={s.list}>
           {chats.map((c) => (
-            <li
+            <div
               key={`chat_${c.id}`}
               className={c.id === currentChatId ? s.selectedChat : s.chat}
               onClick={() => onChatClick(c.id)}
             >
-              {c.user1.id === currentUserId ? c.user2.name : c.user1.name}
-            </li>
+              <div className={s.chatName}>
+                {c.user1.id === currentUserId ? c.user2.name : c.user1.name}
+              </div>
+              <div className={s.badge}>
+                {c.unreadMessagesCount > 0 && (
+                  <Badge bg="danger">{c.unreadMessagesCount}</Badge>
+                )}
+              </div>
+            </div>
           ))}
         </ul>
       </div>

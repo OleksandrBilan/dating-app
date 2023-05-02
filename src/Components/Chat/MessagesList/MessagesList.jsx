@@ -40,6 +40,7 @@ export function MessagesList({ messages }) {
               {(m.senderId === currentUserId ? "You" : m.senderName) +
                 ", " +
                 moment(new Date(m.dateTime)).format("DD.MM.YYYY, HH:mm")}
+              {m.senderId === currentUserId ? ", " + m.status : ""}
             </div>
           </div>
         ))}
