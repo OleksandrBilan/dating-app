@@ -17,27 +17,27 @@ export function Chat({ chatId, onChatDelete }) {
   const [currentUserId, setCurrentUserId] = useState();
   const navigate = useNavigate();
 
-  function setMessagesAsRead() {
+  function setMessagesAsRead(userId) {
     return axios.post(`${API_URL}/recommendations/setChatMessagesRead`, {
       chatId: chatId,
-      userId: currentUserId,
+      userId: userId,
     });
   }
 
   useEffect(() => {
-    setCurrentUserId(AuthService.getUserInfo().id);
-
-    if (connection) {
-      closeConnection();
-    }
+    const userId = AuthService.getUserInfo().id;
+    setCurrentUserId(userId);
 
     if (chatId) {
-      const user = AuthService.getUserInfo();
-      joinChat(user.id, chatId?.toString()).then((connection) =>
-        setConnection(connection)
-      );
+      closeConnection();
 
-      setMessagesAsRead().then(() =>
+      joinChat(userId, chatId?.toString()).then((connection) => {
+        if (connection.state === "Connected") {
+          setConnection(connection);
+        }
+      });
+
+      setMessagesAsRead(userId).then(() =>
         axios
           .get(`${API_URL}/recommendations/getChat?chatId=${chatId}`)
           .then((response) => {
@@ -52,27 +52,28 @@ export function Chat({ chatId, onChatDelete }) {
   async function joinChat(userId, chatId) {
     if (chatId) {
       try {
-        const connection = new HubConnectionBuilder()
+        const newConnection = new HubConnectionBuilder()
           .withUrl(`${API_URL}/chat`)
           .configureLogging(LogLevel.Information)
           .build();
 
-        connection.on("ReceiveMessage", (newMessage) => {
+        newConnection.on("ReceiveMessage", (newMessage) => {
           setMessages((messages) => [...messages, newMessage]);
         });
 
-        connection.onclose((e) => {
-          setConnection();
-          setMessages([]);
-        });
+        await newConnection.start();
+        await newConnection
+          .invoke("JoinChat", {
+            userId: userId,
+            chatId: chatId,
+          })
+          .then((successfullJoin) => {
+            if (!successfullJoin) {
+              newConnection.stop();
+            }
+          });
 
-        await connection.start();
-        await connection.invoke("JoinChat", {
-          userId: userId,
-          chatId: chatId,
-        });
-
-        return connection;
+        return newConnection;
       } catch (e) {
         alert("Can't open the chat :(");
         console.log(e);
@@ -91,7 +92,7 @@ export function Chat({ chatId, onChatDelete }) {
 
   async function closeConnection() {
     try {
-      await connection.stop();
+      await connection?.stop();
     } catch (e) {
       console.log(e);
     }
