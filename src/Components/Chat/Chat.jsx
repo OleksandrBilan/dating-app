@@ -17,13 +17,6 @@ export function Chat({ chatId, onChatDelete }) {
   const [currentUserId, setCurrentUserId] = useState();
   const navigate = useNavigate();
 
-  function setMessagesAsRead(userId) {
-    return axios.post(`${API_URL}/recommendations/setChatMessagesRead`, {
-      chatId: chatId,
-      userId: userId,
-    });
-  }
-
   useEffect(() => {
     const userId = AuthService.getUserInfo().id;
     setCurrentUserId(userId);
@@ -31,23 +24,29 @@ export function Chat({ chatId, onChatDelete }) {
     if (chatId) {
       closeConnection();
 
-      joinChat(userId, chatId?.toString()).then((connection) => {
-        if (connection.state === "Connected") {
-          setConnection(connection);
+      let activeConnection;
+      joinChat(userId, chatId?.toString()).then((newConnection) => {
+        if (newConnection.state === "Connected") {
+          setConnection(newConnection);
+          activeConnection = newConnection;
         }
       });
 
-      setMessagesAsRead(userId).then(() =>
-        axios
-          .get(`${API_URL}/recommendations/getChat?chatId=${chatId}`)
-          .then((response) => {
-            setChatInfo(response.data);
-            setMessages(response.data.messages);
-          })
-          .catch((error) => alert("Can't load the chat :("))
-      );
+      axios
+        .get(`${API_URL}/recommendations/getChat?chatId=${chatId}`)
+        .then((response) => {
+          setChatInfo(response.data);
+          setMessages(response.data.messages);
+        })
+        .catch((error) => alert("Can't load the chat :("));
     }
   }, [chatId]);
+
+  useEffect(() => {
+    connection
+      ?.invoke("ReadMessages", chatId?.toString(), AuthService.getUserInfo().id)
+      .then((newMessages) => setMessages(newMessages));
+  }, [connection]);
 
   async function joinChat(userId, chatId) {
     if (chatId) {
@@ -58,7 +57,17 @@ export function Chat({ chatId, onChatDelete }) {
           .build();
 
         newConnection.on("ReceiveMessage", (newMessage) => {
-          setMessages((messages) => [...messages, newMessage]);
+          newConnection
+            .invoke(
+              "ReadMessages",
+              chatId?.toString(),
+              AuthService.getUserInfo().id
+            )
+            .then((newMessages) => setMessages(newMessages));
+        });
+
+        newConnection.on("ReceiveReadMessages", (newMessages) => {
+          setMessages(newMessages);
         });
 
         await newConnection.start();
