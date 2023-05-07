@@ -1,0 +1,32 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  background-color: rgba(var(--bs-dark-rgb));
+  box-shadow: 7px 7px 5px #5f85db;
+  padding: 1%;
+  width: 20%;
+  gap: 10px;
+  height: fit-content;
+}
+
+.price {
+  font-size: 18px;
+  font-style: italic;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.additionalInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}

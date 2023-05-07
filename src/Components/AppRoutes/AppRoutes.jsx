@@ -12,6 +12,7 @@ import { UserMutualLikes } from "../../Pages/UserMutualLikes/UserMutualLikes";
 import { UserChats } from "../../Pages/UserChats/UserChats";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { UserInfo } from "../../Pages/UserInfo/UserInfo";
+import { UpgradeToVip } from "../../Pages/UpgradeToVip/UpgradeToVip";
 
 export function AppRoutes() {
   return (
@@ -89,6 +90,14 @@ export function AppRoutes() {
           element={
             <ProtectedRoute>
               <UserInfo />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/upgradeToVip"
+          element={
+            <ProtectedRoute>
+              <UpgradeToVip />
             </ProtectedRoute>
           }
         />

@@ -73,6 +73,9 @@ export function CustomNavbar() {
                 <Nav.Link href="" onClick={() => navigate("/editUserProfile")}>
                   My profile
                 </Nav.Link>
+                <Nav.Link href="" onClick={() => navigate("/upgradeToVip")}>
+                  Upgrade to VIP
+                </Nav.Link>
               </>
             )}
           </Nav>
