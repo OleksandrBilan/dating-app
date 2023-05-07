@@ -9,14 +9,14 @@ import { XCircle } from "react-bootstrap-icons";
 
 export function UserLikes() {
   const [recommendedUsers, setRecommendedUsers] = useState([]);
-  const [currentUserId, setCurrentUserId] = useState();
+  const [currentUser, setCurrentUser] = useState();
   const [likesCount, setLikesCount] = useState(0);
 
   useEffect(() => {
-    const userId = AuthService.getUserInfo().id;
-    setCurrentUserId(userId);
+    const user = AuthService.getUserInfo();
+    setCurrentUser(user);
     axios
-      .get(`${API_URL}/recommendations/getUserLikes?userId=${userId}`)
+      .get(`${API_URL}/recommendations/getUserLikes?userId=${user.id}`)
       .then((response) => {
         setRecommendedUsers(response.data);
         setLikesCount(response.data.length);
@@ -26,7 +26,7 @@ export function UserLikes() {
 
   function onUserLike(recommendedUser) {
     const request = {
-      likingUserId: currentUserId,
+      likingUserId: currentUser.id,
       likedUserId: recommendedUser.user.id,
     };
     axios
@@ -49,18 +49,26 @@ export function UserLikes() {
       <CustomNavbar />
       <div className={s.header}>
         {recommendedUsers && recommendedUsers.length > 0 ? (
-          <h4>You have {likesCount} likes :)</h4>
+          <h4>
+            You have {likesCount} likes{" "}
+            {currentUser?.roles?.includes("VIP")
+              ? ""
+              : "(upgrade to VIP to see them)"}{" "}
+            :)
+          </h4>
         ) : (
           <h4>No likes yet :)</h4>
         )}
       </div>
       <div className={s.recommendedUsers}>
-        <RecommendedUsers
-          usersRecommendations={recommendedUsers}
-          onUserLike={onUserLike}
-          onUserSkip={onUserSkip}
-          SkipIcon={() => <XCircle fill="gray" size={35} />}
-        />
+        {currentUser?.roles?.includes("VIP") && (
+          <RecommendedUsers
+            usersRecommendations={recommendedUsers}
+            onUserLike={onUserLike}
+            onUserSkip={onUserSkip}
+            SkipIcon={() => <XCircle fill="gray" size={35} />}
+          />
+        )}
       </div>
     </div>
   );

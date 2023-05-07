@@ -43,6 +43,14 @@ export function UsersRecommendations() {
     };
     axios
       .post(`${API_URL}/recommendations/addUserLike`, request)
+      .then((response) => {
+        if (response.data === false) {
+          alert(
+            "You can't like any more people today (you can ugrade to VIP to avoid this limitation) :)"
+          );
+          setRecommendedUsers([]);
+        }
+      })
       .catch((error) => alert("Error saving yout like :("));
   }
 
