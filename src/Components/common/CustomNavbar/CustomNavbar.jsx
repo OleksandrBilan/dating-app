@@ -38,6 +38,12 @@ export function CustomNavbar() {
                 >
                   Questionnaire
                 </Nav.Link>
+                <Nav.Link
+                  href=""
+                  onClick={() => navigate("/adminSubscriptions")}
+                >
+                  VIP requests
+                </Nav.Link>
               </>
             ) : (
               <>

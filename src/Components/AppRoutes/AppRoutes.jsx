@@ -13,6 +13,7 @@ import { UserChats } from "../../Pages/UserChats/UserChats";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { UserInfo } from "../../Pages/UserInfo/UserInfo";
 import { UpgradeToVip } from "../../Pages/UpgradeToVip/UpgradeToVip";
+import { AdminSubscriptions } from "../../Pages/AdminSubscriptions/AdminSubscriptions";
 
 export function AppRoutes() {
   return (
@@ -98,6 +99,14 @@ export function AppRoutes() {
           element={
             <ProtectedRoute>
               <UpgradeToVip />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/adminSubscriptions"
+          element={
+            <ProtectedRoute>
+              <AdminSubscriptions />
             </ProtectedRoute>
           }
         />

@@ -1,0 +1,13 @@
+.icons {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+.additionalInfo {
+  word-break: break-all;
+}

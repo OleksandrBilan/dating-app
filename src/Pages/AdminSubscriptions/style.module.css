@@ -1,0 +1,20 @@
+.container {
+  margin-top: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 6px;
+  background-color: rgba(var(--bs-dark-rgb));
+  box-shadow: 7px 7px 5px #5f85db;
+  padding: 1%;
+  max-height: 88vh;
+  overflow-y: auto;
+  max-width: 96vw;
+}
