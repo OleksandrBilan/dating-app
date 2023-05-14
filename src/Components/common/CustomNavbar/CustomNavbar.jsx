@@ -26,7 +26,7 @@ export function CustomNavbar() {
     <Navbar bg="dark" variant="dark" fixed="top" className={s.navbar}>
       <Container>
         <Navbar.Brand href="" onClick={() => navigate("/")}>
-          Dating App
+          SoulSync
         </Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
